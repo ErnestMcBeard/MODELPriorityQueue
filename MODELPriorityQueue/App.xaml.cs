@@ -19,7 +19,7 @@ namespace MODELPriorityQueue
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            await NavigationService.NavigateAsync(typeof(Views.MainPage));
+            await NavigationService.NavigateAsync(typeof(Views.LoginPage));
         }
     }
 }
