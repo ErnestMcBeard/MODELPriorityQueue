@@ -13,17 +13,216 @@
         <vm:MainPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        
+        <!--#region Left Column-->
+        <Grid Margin="0,0,4,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <controls:PageHeader x:Name="pageHeader" Content="Main Page"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" />
+            <RelativePanel Background="{ThemeResource ApplicationPrimaryColor}"
+                           Height="40">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
+                           Foreground="{ThemeResource ApplicationFontColor}"
+                           Text="Jobs" 
+                           Margin="4"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignVerticalCenterWithPanel="True" />
 
-        <TextBlock x:Name="mainTextBlock" Margin="16,12,0,0"
-                   RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.Below="pageHeader" Text="Hello World" />
+                <Button x:Name="AddButton"
+                        Style="{ThemeResource ButtonStyle}"
+                        Width="40"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE710;" 
+                               Foreground="{ThemeResource ApplicationFontColor}" />
+                </Button>
+                <Button Style="{ThemeResource ButtonStyle}"
+                        Width="40"
+                        RelativePanel.LeftOf="AddButton"
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#59213;" 
+                               Foreground="{ThemeResource ApplicationFontColor}" />
+                </Button>
+            </RelativePanel>
+        </Grid>
+        <!--#endregion-->
+        
+        <!--#region Details Section-->
+        <Grid Margin="4,0,0,0"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock"
+                       BasedOn="{StaticResource BodyTextBlockStyle}">
+                    <Setter Property="RelativePanel.AlignLeftWithPanel"
+                            Value="True" />
+                    <Setter Property="RelativePanel.AlignRightWithPanel"
+                            Value="True" />
+                </Style>
+            </Grid.Resources>
 
-    </RelativePanel>
+            <RelativePanel x:Name="Header"
+                           Grid.ColumnSpan="3"
+                           Margin="0,0,0,12">
+                <TextBlock x:Name="Subject"
+                           Style="{ThemeResource SubheaderTextBlockStyle}"
+                           Text="Subject" />
+                <Button x:Name="PaymentButton"
+                        Style="{ThemeResource ButtonStyle}"
+                        Height="48"
+                        Width="48"
+                        ToolTipService.ToolTip="Print Invoice"
+                        RelativePanel.AlignRightWithPanel="True">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE8A1;" 
+                               FontSize="20"/>
+                </Button>
+                <Button x:Name="AssignTechnician"
+                        Style="{ThemeResource ButtonStyle}"
+                        Height="48"
+                        Width="48"
+                        ToolTipService.ToolTip="Assign Self to Job"
+                        RelativePanel.LeftOf="PaymentButton">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE8FA;"
+                               FontSize="20" />
+                </Button>
+            </RelativePanel>
+
+            <RelativePanel x:Name="Footer"
+                           Margin="0,12,0,0"
+                           Grid.Row="2"
+                           Grid.Column="2">
+                <Button x:Name="CompletedButton"
+                        Content="Mark as Completed" 
+                        Margin="2,4,4,4"
+                        RelativePanel.AlignRightWithPanel="True" />
+                <Button x:Name="SaveButton"
+                        Content="Save Changes" 
+                        Margin="4,4,2,4"
+                        RelativePanel.LeftOf="CompletedButton" />
+            </RelativePanel>
+
+            <Grid Background="Black"
+                  Width="1"
+                  Grid.Column="1" 
+                  Grid.Row="1"/>
+
+            <!--#region Read Only Left Column-->
+            <RelativePanel Margin="0,0,8,0" Grid.Row="1">
+                <TextBlock x:Name="Description"
+                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam fermentum tellus eget varius. Donec ultricies lectus eu malesuada pellentesque. Morbi tincidunt ex eu leo varius pellentesque. Nunc malesuada nibh id elit viverra tempor id et est. Donec aliquam rhoncus metus, vitae commodo dolor malesuada eget. Nam pulvinar sapien a diam euismod porttitor. Suspendisse arcu neque, vulputate et ipsum rhoncus, rhoncus pharetra enim." 
+                           Margin="0,0,0,12" />
+                <TextBlock x:Name="EstimatedHours"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="Description">
+                    <Run Text="Estimated Hours:" />
+                    <Run Text="3" />
+                </TextBlock>
+                <TextBlock x:Name="ActualHours"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="EstimatedHours">
+                    <Run Text="Actual Hours:" />
+                    <Run Text="4" />
+                </TextBlock>
+                <TextBlock x:Name="CreatedBy"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="ActualHours">
+                    <Run Text="Created By:" />
+                    <Run Text="Smitty Werbenjagermanjensen" />
+                </TextBlock>
+                <TextBlock x:Name="AssignedTo"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="CreatedBy">
+                    <Run Text="Assigned To:" />
+                    <Run Text="Roman Jones" />
+                </TextBlock>
+            </RelativePanel>
+            <!--#endregion-->
+            
+            <!--#region Editable Left Column-->
+            
+            <!--#endregion-->
+            
+            <!--#region Customer Right Column-->
+            <RelativePanel Margin="8,0" 
+                           Grid.Row="1"
+                           Grid.Column="2">
+                <RelativePanel.Resources>
+                    <Style TargetType="TextBlock"
+                           BasedOn="{StaticResource BodyTextBlockStyle}">
+                        <Setter Property="RelativePanel.AlignLeftWithPanel"
+                                Value="True" />
+                        <Setter Property="RelativePanel.AlignRightWithPanel"
+                                Value="True" />
+                        <Setter Property="Margin"
+                                Value="0,0,0,12" />
+                    </Style>
+
+                </RelativePanel.Resources>
+                <TextBlock x:Name="Customer"
+                           Style="{ThemeResource TitleTextBlockStyle}"
+                           Text="Customer" 
+                           Margin="0,0,0,12"/>
+                <TextBlock x:Name="Name"
+                           RelativePanel.Below="Customer">
+                    <Run Text="Name:" />
+                    <Run Text="John Doe" />
+                </TextBlock>
+                <TextBlock x:Name="Address"
+                           RelativePanel.Below="Name">
+                    <Run Text="Address:" />
+                    <Run Text="1234 Some St." />
+                </TextBlock>
+                <TextBlock x:Name="City"
+                           RelativePanel.Below="Address">
+                    <Run Text="City: " />
+                    <Run Text="Baton Rouge" />
+                </TextBlock>
+                <TextBlock x:Name="State"
+                           RelativePanel.Below="City">
+                    <Run Text="State: " />
+                    <Run Text="LA" />
+                </TextBlock>
+                <TextBlock x:Name="Zip"
+                           RelativePanel.Below="State">
+                    <Run Text="Zip: " />
+                    <Run Text="70808" />
+                </TextBlock>
+                <TextBlock x:Name="Phone"
+                           RelativePanel.Below="Zip">
+                    <Run Text="Phone: " />
+                    <Run Text="(123) 555-1234" />
+                </TextBlock>
+                <TextBlock x:Name="Serviced"
+                           RelativePanel.Below="Phone">
+                    <Run Text="Times Serviced:" />
+                    <Run Text="4" />
+                </TextBlock>
+            </RelativePanel>
+            <!--#endregion-->
+        </Grid>
+        <!--#endregion-->
+    </Grid>
 
 </Page>
