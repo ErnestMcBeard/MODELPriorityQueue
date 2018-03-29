@@ -46,13 +46,26 @@
                                Text="&#xE710;" 
                                Foreground="{ThemeResource ApplicationFontColor}" />
                 </Button>
-                <Button Style="{ThemeResource ButtonStyle}"
+                <Button x:Name="DeleteJobButton"
+                        Style="{ThemeResource ButtonStyle}"
                         Width="40"
                         RelativePanel.LeftOf="AddJobButton"
                         RelativePanel.AlignTopWithPanel="True"
                         RelativePanel.AlignBottomWithPanel="True">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                Text="&#59213;"
+                               Foreground="{ThemeResource ApplicationFontColor}" />
+                </Button>
+                <Button x:Name="ViewStatsButton"
+                        Style="{ThemeResource ButtonStyle}"
+                        Width="40"
+                        ToolTipService.ToolTip="Statistics"
+                        RelativePanel.LeftOf="DeleteJobButton"
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        Click="ViewStatsButton_Click">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE8BC;"
                                Foreground="{ThemeResource ApplicationFontColor}" />
                 </Button>
             </RelativePanel>

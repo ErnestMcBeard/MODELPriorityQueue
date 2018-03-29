@@ -19,5 +19,10 @@ namespace MODELPriorityQueue.Views
             await dialog.ShowAsync();
 
         }
+
+        private async void ViewStatsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await new StatsDialog().ShowAsync();
+        }
     }
 }

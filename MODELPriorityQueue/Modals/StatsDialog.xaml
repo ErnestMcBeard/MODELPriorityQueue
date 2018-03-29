@@ -1,0 +1,54 @@
+﻿<ContentDialog
+    x:Class="MODELPriorityQueue.Modals.StatsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MODELPriorityQueue.Modals"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Statistics"
+    SecondaryButtonText="Close"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <RelativePanel.Resources>
+            <Style TargetType="TextBlock"
+                   BasedOn="{StaticResource BodyTextBlockStyle}">
+                <Setter Property="RelativePanel.AlignLeftWithPanel"
+                        Value="True" />
+                <Setter Property="RelativePanel.AlignRightWithPanel"
+                        Value="True" />
+                <Setter Property="Margin"
+                        Value="0,0,0,12" />
+            </Style>
+        </RelativePanel.Resources>
+        <DatePicker x:Name="StartDate" 
+                    Header="Start Date"
+                    Margin="0,0,0,4"/>
+        <DatePicker x:Name="EndDate"
+                    Header="End Date"
+                    Margin="0,0,4,4"
+                    RelativePanel.Below="StartDate" />
+        <Button x:Name="CalculateButton"
+                Content="Calculate"
+                Margin="0,0,0,4"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.RightOf="EndDate"
+                RelativePanel.AlignBottomWith="EndDate" />
+        <TextBlock x:Name="WaitTime"
+                   RelativePanel.Below="EndDate">
+            <Run Text="Average Wait Time: " />
+            <Run Text="5 hours" />
+        </TextBlock>
+        <TextBlock x:Name="QueueLength"
+                   RelativePanel.Below="WaitTime">
+            <Run Text="Average Queue Length: " />
+            <Run Text="7 items" />
+        </TextBlock>
+        <TextBlock x:Name="TimeEmpty"
+                   RelativePanel.Below="QueueLength">
+            <Run Text="% Time Empty: " />
+            <Run Text="90%" />
+        </TextBlock>
+    </RelativePanel>
+</ContentDialog>
