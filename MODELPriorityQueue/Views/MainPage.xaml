@@ -130,11 +130,11 @@
                 <Button x:Name="CompletedButton"
                         Content="Mark as Completed" 
                         Margin="2,4,4,4"
-                        RelativePanel.AlignRightWithPanel="True" />
+                        RelativePanel.AlignRightWithPanel="True" Click="CompletedButton_Click" />
                 <Button x:Name="SaveButton"
                         Content="Save Changes" 
                         Margin="4,4,2,4"
-                        RelativePanel.LeftOf="CompletedButton" />
+                        RelativePanel.LeftOf="CompletedButton" Click="SaveButton_Click" />
             </RelativePanel>
 
             <Grid Background="Black"

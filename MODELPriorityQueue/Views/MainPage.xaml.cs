@@ -24,5 +24,15 @@ namespace MODELPriorityQueue.Views
         {
             await new StatsDialog().ShowAsync();
         }
+
+        private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            //Auto generated method This is where the function call to the back end will go. I assume
+        }
+
+        private void CompletedButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            //Same thing here. This is the button click action handler.
+        }
     }
 }
