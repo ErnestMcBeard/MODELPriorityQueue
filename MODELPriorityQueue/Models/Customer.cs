@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace PriorityQueueWebAPI.Models
+namespace MODELPriorityQueue.Models
 {
-    public class Customer
+    public class Customer : DatabaseEntry
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public int TimesServiced { get; set; }
         public string Street { get; set; }

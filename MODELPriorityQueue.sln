@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2015
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MODELPriorityQueue", "MODELPriorityQueue\MODELPriorityQueue.csproj", "{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiModels", "Models\WebApiModels.csproj", "{172A7664-CFA1-4968-9D5B-354CCD25B822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiModels", "Models\WebApiModels.csproj", "{172A7664-CFA1-4968-9D5B-354CCD25B822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|Any CPU.Build.0 = Debug|x86
+		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|ARM.ActiveCfg = Debug|ARM
 		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|ARM.Build.0 = Debug|ARM
 		{F4B733E5-2FC3-4FCC-AD15-C0F8843E157E}.Debug|ARM.Deploy.0 = Debug|ARM
