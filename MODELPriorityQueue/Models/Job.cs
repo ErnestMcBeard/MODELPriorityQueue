@@ -4,15 +4,76 @@ namespace MODELPriorityQueue.Models
 {
     public class Job : DatabaseEntry
     {
-        public string Subject { get; set; }
-        public string Description { get; set; }
-        public int Priority { get; set; }
-        public int Hours { get; set; }
-        public bool Completed { get; set; }
-        public Guid NextJob { get; set; }
-        public Guid PreviousJob { get; set; }
-        public Guid Customer { get; set; }
-        public Guid AssignedBy { get; set; }
-        public Guid Technician { get; set; }
+        private string subject;
+        private string description;
+        private int priority;
+        private int hours;
+        private bool completed;
+        private Guid nextJob;
+        private Guid previousJob;
+        private Guid customer;
+        private Guid assignedBy;
+        private Guid technician;
+
+
+        public string Subject
+        {
+            get { return subject; }
+            set { Set(() => Subject, ref subject, value); }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { Set(() => Description, ref description, value); }
+        }
+
+        public int Priority
+        {
+            get { return priority; }
+            set { Set(() => Priority, ref priority, value); }
+        }
+
+        public int Hours
+        {
+            get { return hours; }
+            set { Set(() => Hours, ref hours, value); }
+        }
+
+        public bool Completed
+        {
+            get { return completed; }
+            set { Set(() => Completed, ref completed, value); }
+        }
+
+        public Guid NextJob
+        {
+            get { return nextJob; }
+            set { Set(() => NextJob, ref nextJob, value); }
+        }
+
+        public Guid PreviousJob
+        {
+            get { return previousJob; }
+            set { Set(() => PreviousJob, ref previousJob, value); }
+        }
+
+        public Guid Customer
+        {
+            get { return customer; }
+            set { Set(() => Customer, ref customer, value); }
+        }
+
+        public Guid AssignedBy
+        {
+            get { return assignedBy; }
+            set { Set(() => AssignedBy, ref assignedBy, value); }
+        }
+
+        public Guid Technician
+        {
+            get { return technician; }
+            set { Set(() => Technician, ref technician, value); }
+        }
     }
 }

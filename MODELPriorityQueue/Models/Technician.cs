@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
     public class Technician : User
     {
-        public DateTimeOffset StartDate;
+        private DateTimeOffset startDate;
+
+        public DateTimeOffset StartDate
+        {
+            get { return startDate; }
+            set { Set(() => StartDate, ref startDate, value); }
+        }
     }
 }

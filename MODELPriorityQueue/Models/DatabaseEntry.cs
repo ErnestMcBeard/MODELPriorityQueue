@@ -1,14 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System;
 using Template10.Mvvm;
 
 namespace MODELPriorityQueue.Models
 {
     public abstract class DatabaseEntry : BindableBase
     {
-        public Guid id;
-        public bool isDirty;
+        private Guid id;
+        private bool isDirty;
+
+        public Guid Id
+        {
+            get { return id; }
+            set { Set(() => Id, ref id, value); }
+        }
+
+        [JsonIgnore]
+        public bool IsDirty
+        {
+            get { return isDirty; }
+            set { Set(() => IsDirty, ref isDirty, value); }
+        }
 
         /// <summary>
         /// Adds this object as a new item to the database with a unique Guid

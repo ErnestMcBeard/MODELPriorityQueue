@@ -6,8 +6,27 @@ namespace MODELPriorityQueue.Models
 {
     public class Product : DatabaseEntry
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Category { get; set; }
+        private string name;
+        private decimal price;
+        private string category;
+
+
+        public string Name
+        {
+            get { return name; }
+            set { Set(() => Name, ref name, value); }
+        }
+
+        public decimal Price
+        {
+            get { return price; }
+            set { Set(() => Price, ref price, value); }
+        }
+
+        public string Category
+        {
+            get { return category; }
+            set { Set(() => Category, ref category, value); }
+        }
     }
 }
