@@ -1,4 +1,5 @@
 ﻿using MODELPriorityQueue.Modals;
+using MODELPriorityQueue.ViewModels;
 using System;
 using Windows.UI.Xaml.Controls;
 
@@ -32,7 +33,7 @@ namespace MODELPriorityQueue.Views
 
         private void CompletedButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            //Same thing here. This is the button click action handler.
+         //This somehow needs to reference the MainPageViewModel   
         }
     }
 }

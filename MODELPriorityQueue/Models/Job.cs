@@ -8,6 +8,7 @@ namespace MODELPriorityQueue.Models
         public string Description { get; set; }
         public int Priority { get; set; }
         public int Hours { get; set; }
+        public bool Completed { get; set; }
         public Guid NextJob { get; set; }
         public Guid PreviousJob { get; set; }
         public Guid Customer { get; set; }
