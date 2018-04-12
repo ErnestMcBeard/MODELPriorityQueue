@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
-    public class Customer : DatabaseEntry
+    public class Customer : DatabaseEntity<Customer>
     {
+        private string endpoint = "Customers";
+
         private string name;
         private int timesServiced;
         private string street;
@@ -46,6 +49,21 @@ namespace MODELPriorityQueue.Models
         {
             get { return state; }
             set { Set(() => State, ref state, value); }
+        }
+
+        public override Task<bool> Add()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> Save()
+        {
+            throw new NotImplementedException();
         }
     }
 }

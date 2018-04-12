@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
-    public class Job : DatabaseEntry
+    public class Job : DatabaseEntity<Job>
     {
         private string subject;
         private string description;
@@ -74,6 +75,21 @@ namespace MODELPriorityQueue.Models
         {
             get { return technician; }
             set { Set(() => Technician, ref technician, value); }
+        }
+
+        public override Task<bool> Add()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> Save()
+        {
+            throw new NotImplementedException();
         }
     }
 }

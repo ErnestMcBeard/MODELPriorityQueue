@@ -35,5 +35,10 @@ namespace MODELPriorityQueue.Views
         {
          //This somehow needs to reference the MainPageViewModel   
         }
+
+        private void SettingsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ViewModel.NavigateToSettingsPage();
+        }
     }
 }

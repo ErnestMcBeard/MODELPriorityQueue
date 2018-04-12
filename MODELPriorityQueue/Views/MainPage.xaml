@@ -68,6 +68,18 @@
                                Text="&#xE8BC;"
                                Foreground="{ThemeResource ApplicationFontColor}" />
                 </Button>
+                <Button x:Name="SettingsButton"
+                        Style="{ThemeResource ButtonStyle}"
+                        Width="40"
+                        ToolTipService.ToolTip="Settings"
+                        RelativePanel.LeftOf="ViewStatsButton"
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        Click="SettingsButton_Click">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE713;"
+                               Foreground="{ThemeResource ApplicationFontColor}" />
+                </Button>
             </RelativePanel>
         </Grid>
         <!--#endregion-->

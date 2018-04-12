@@ -33,5 +33,9 @@ namespace MODELPriorityQueue.ViewModels
             //I believe the view will update whenever this changes?
         }
 
+        public void NavigateToSettingsPage()
+        {
+            App.Current.NavigationService.Navigate(typeof(Views.Settings));
+        }
     }
 }
