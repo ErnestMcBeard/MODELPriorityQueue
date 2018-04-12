@@ -15,6 +15,10 @@ namespace MODELPriorityQueue.Models
         private Guid assignedBy;
         private Guid technician;
 
+        protected override string ServerPath
+        {
+            get { return "Jobs"; }
+        }
 
         public string Subject
         {

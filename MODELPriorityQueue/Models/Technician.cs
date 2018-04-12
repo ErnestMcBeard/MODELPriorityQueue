@@ -6,6 +6,11 @@ namespace MODELPriorityQueue.Models
     {
         private DateTimeOffset startDate;
 
+        protected override string ServerPath
+        {
+            get { return "Technicians"; }
+        }
+
         public DateTimeOffset StartDate
         {
             get { return startDate; }

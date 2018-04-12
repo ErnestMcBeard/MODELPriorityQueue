@@ -11,6 +11,10 @@ namespace MODELPriorityQueue.Models
         private int zip;
         private string state;
 
+        protected override string ServerPath
+        {
+            get { return "Customers"; }
+        }
 
         public string Name
         {

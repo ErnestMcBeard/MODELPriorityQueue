@@ -10,6 +10,10 @@ namespace MODELPriorityQueue.Models
         private decimal price;
         private string category;
 
+        protected override string ServerPath
+        {
+            get { return "Products"; }
+        }
 
         public string Name
         {
