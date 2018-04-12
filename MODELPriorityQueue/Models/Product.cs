@@ -4,17 +4,12 @@ using System.Linq;
 
 namespace MODELPriorityQueue.Models
 {
-    public class Product : DatabaseEntry
+    public class Product : DatabaseEntry<Product>
     {
         private string name;
         private decimal price;
         private string category;
-
-        protected override string ServerPath
-        {
-            get { return "Products"; }
-        }
-
+        
         public string Name
         {
             get { return name; }

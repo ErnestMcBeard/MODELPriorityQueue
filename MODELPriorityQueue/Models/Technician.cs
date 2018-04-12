@@ -2,15 +2,10 @@
 
 namespace MODELPriorityQueue.Models
 {
-    public class Technician : User
+    public class Technician : User<Technician>
     {
         private DateTimeOffset startDate;
-
-        protected override string ServerPath
-        {
-            get { return "Technicians"; }
-        }
-
+        
         public DateTimeOffset StartDate
         {
             get { return startDate; }

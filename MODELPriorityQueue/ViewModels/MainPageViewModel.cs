@@ -18,7 +18,7 @@ namespace MODELPriorityQueue.ViewModels
         private Job activeJob;
         private Customer activeCustomer;
 
-        public void markCompleteion()
+        public void MarkCompleteion()
         {
             /*
              * The logic for this code should go something like this:

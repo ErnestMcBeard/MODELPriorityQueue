@@ -1,10 +1,6 @@
 ﻿namespace MODELPriorityQueue.Models
 {
-    public class Manager : User
+    public class Manager : User<Manager>
     {
-        protected override string ServerPath
-        {
-            get { return "Managers"; }
-        }
     }
 }

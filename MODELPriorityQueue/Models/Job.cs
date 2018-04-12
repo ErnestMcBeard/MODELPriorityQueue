@@ -2,7 +2,7 @@
 
 namespace MODELPriorityQueue.Models
 {
-    public class Job : DatabaseEntry
+    public class Job : DatabaseEntry<Job>
     {
         private string subject;
         private string description;
@@ -14,11 +14,6 @@ namespace MODELPriorityQueue.Models
         private Guid customer;
         private Guid assignedBy;
         private Guid technician;
-
-        protected override string ServerPath
-        {
-            get { return "Jobs"; }
-        }
 
         public string Subject
         {

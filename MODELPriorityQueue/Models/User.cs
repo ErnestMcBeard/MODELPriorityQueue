@@ -1,6 +1,6 @@
 ﻿namespace MODELPriorityQueue.Models
 {
-    public abstract class User : DatabaseEntry
+    public abstract class User<T> : DatabaseEntry<T> where T : User<T>
     {
         public string username;
         public string password;

@@ -2,7 +2,7 @@
 
 namespace MODELPriorityQueue.Models
 {
-    public class Customer : DatabaseEntry
+    public class Customer : DatabaseEntry<Customer>
     {
         private string name;
         private int timesServiced;
@@ -10,11 +10,6 @@ namespace MODELPriorityQueue.Models
         private string city;
         private int zip;
         private string state;
-
-        protected override string ServerPath
-        {
-            get { return "Customers"; }
-        }
 
         public string Name
         {
