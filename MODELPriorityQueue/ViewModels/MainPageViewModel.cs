@@ -6,17 +6,26 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using MODELPriorityQueue.Models;
+using System.Collections.ObjectModel;
 
 namespace MODELPriorityQueue.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        //The active job and customer are the ones that are currently loaded onto the view
-        //I assume that the activeJob and the activeCustomer information will have
-        //to be stored by some kind of field variable that gets set by user clicks on the
-        //job feed.
-        private Job activeJob;
-        private Customer activeCustomer;
+        private ObservableCollection<Job> jobs;
+        public ObservableCollection<Job> Jobs
+        {
+            get { return jobs; }
+            set { Set(() => Jobs, ref jobs, value); }
+        }
+
+        private Job selectedJob;
+        public Job SelectedJob
+        {
+            get { return selectedJob; }
+            set { Set(() => SelectedJob, ref selectedJob, value); }
+        }
+
 
         public void MarkCompleteion()
         {
@@ -27,7 +36,7 @@ namespace MODELPriorityQueue.ViewModels
              * sets the new active job to the next on the queue or highest priority
              * updates the view
              */
-            activeJob.Completed = true;
+            SelectedJob.Completed = true;
             //UPDATE BACKEND CODE HERE
             //SET ACTIVE JOB TO NEXT JOB
             //I believe the view will update whenever this changes?
