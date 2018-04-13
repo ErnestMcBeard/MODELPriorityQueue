@@ -3,11 +3,7 @@ using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
-<<<<<<< HEAD
     public class Customer : DatabaseEntity<Customer>
-=======
-    public class Customer : DatabaseEntry<Customer>
->>>>>>> d740321f29e99d3cf4abb813c3df9a3d3c8a6e12
     {
         private string endpoint = "Customers";
 

@@ -66,7 +66,7 @@ namespace MODELPriorityQueue.Modals
                 Customer = c.Id
             };
 
-            await job.Post();
+            await job.Add();
         }
     }
 }
