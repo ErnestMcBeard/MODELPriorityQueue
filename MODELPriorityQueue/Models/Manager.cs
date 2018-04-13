@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
-    public class Manager : User
+    public class Manager : User<Manager>
     {
+<<<<<<< HEAD
         private string endpoint = "Managers";
 
         public override async Task<bool> Add()
@@ -24,5 +25,7 @@ namespace MODELPriorityQueue.Models
         {
             throw new System.NotImplementedException();
         }
+=======
+>>>>>>> d740321f29e99d3cf4abb813c3df9a3d3c8a6e12
     }
 }

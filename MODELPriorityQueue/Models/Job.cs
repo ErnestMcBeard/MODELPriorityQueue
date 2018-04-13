@@ -3,7 +3,11 @@ using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
+<<<<<<< HEAD
     public class Job : DatabaseEntity<Job>
+=======
+    public class Job : DatabaseEntry<Job>
+>>>>>>> d740321f29e99d3cf4abb813c3df9a3d3c8a6e12
     {
         private string subject;
         private string description;
@@ -15,7 +19,6 @@ namespace MODELPriorityQueue.Models
         private Guid customer;
         private Guid assignedBy;
         private Guid technician;
-
 
         public string Subject
         {

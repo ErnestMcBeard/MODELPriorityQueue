@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace MODELPriorityQueue.Models
 {
-    public class Technician : User
+    public class Technician : User<Technician>
     {
         private DateTimeOffset startDate;
-
+        
         public DateTimeOffset StartDate
         {
             get { return startDate; }
