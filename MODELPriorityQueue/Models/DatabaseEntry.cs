@@ -34,10 +34,11 @@ namespace MODELPriorityQueue.Models
         {
             get { return string.Format("{0}/{1}", serverDomain, typeof(T).Name); }
         }
-        
+
         /// <summary>
-        /// Gets all objects of this class from the server
+        /// Selects all of the object from DbSet<T>
         /// </summary>
+        /// <returns>Returns a list of T object, or null if something fucked up</returns>
         public static async Task<List<T>> Get()
         {
             string response = await client.GetStringAsync(BaseUrl);
@@ -49,8 +50,10 @@ namespace MODELPriorityQueue.Models
         }
 
         /// <summary>
-        /// Gets object of this class with the specified from the server
+        /// Selects an object from DbSet<T> with the given Id
         /// </summary>
+        /// <param name="id">The Guid of the desired object</param>
+        /// <returns>An object from DbSet<T> with the given id, or null if it does not exist</returns>
         public static async Task<T> Get(Guid id)
         {
             string response = await client.GetStringAsync(string.Format("{0}({1})", BaseUrl, id));
@@ -62,25 +65,51 @@ namespace MODELPriorityQueue.Models
         }
 
         /// <summary>
-        /// Adds this object as a new item to the database with a unique Guid
+        /// Selects an object from DbSet<T> with the given Id
         /// </summary>
-        public async Task Post()
+        /// <param name="query">The filter, orderby, etc. See this method definition for examples</param>
+        /// <returns>An object from DbSet<T> with the given id, or null if it does not exist</returns>
+        public static async Task<T> Get(string query)
+        {
+            //Basic Query Examples
+            //Filter:   $filter=Firstname eq 'John' and TimesServiced eq 2
+            //Orderby:  $orderby=Priority desc
+            //Combo:    $filter=Firstname eq 'John'&$orderby=Priority desc
+
+            //For more query options try google. There's a shit-ton
+
+            string response = await client.GetStringAsync(string.Format("{0}?{1}", BaseUrl, query));
+            if (!string.IsNullOrEmpty(response))
+            {
+                return JsonConvert.DeserializeObject<ODataResponse<T>>(response).Value.FirstOrDefault();
+            }
+            return default(T);
+        }
+
+        /// <summary>
+        /// Inserts this object into the database
+        /// </summary>
+        /// <returns>The object in its state after inserting it</returns>
+        public async Task<T> Post()
         {
             string json = JsonConvert.SerializeObject(this);
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(BaseUrl, content);
 
             if (response.IsSuccessStatusCode)
             {
                 string message = await response.Content.ReadAsStringAsync();
-                T updatedObject = (T)this;
-                updatedObject = JsonConvert.DeserializeObject<T>(message);
+                T updatedObject = JsonConvert.DeserializeObject<T>(message);
+                return updatedObject;
             }
+
+            return null;
         }
 
         /// <summary>
-        /// Updates this object in the database
+        /// Updates this instance of the object in the database
         /// </summary>
+        /// <returns>True if it succeeded, false otherwise</returns>
         public async Task<bool> Update()
         {
             var method = new HttpMethod("PATCH");
@@ -96,8 +125,9 @@ namespace MODELPriorityQueue.Models
         }
 
         /// <summary>
-        /// Removes this object from the database
+        /// Deletes the object from DbSet<T> with the same Id as this object
         /// </summary>
+        /// <returns>True if it succeeded, false otherwise</returns>
         public async Task<bool> Delete()
         {
             HttpResponseMessage response = await client.DeleteAsync(string.Format("{0}({1})", BaseUrl, Id));
