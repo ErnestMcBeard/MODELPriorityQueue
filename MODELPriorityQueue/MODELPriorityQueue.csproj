@@ -105,11 +105,8 @@
     <Compile Include="Models\DatabaseEntity.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Manager.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Models\ODataResponse.cs" />
     <Compile Include="Models\Product.cs" />
->>>>>>> d740321f29e99d3cf4abb813c3df9a3d3c8a6e12
     <Compile Include="Models\Technician.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
