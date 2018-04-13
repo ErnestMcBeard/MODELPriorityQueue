@@ -1,3 +1,5 @@
+﻿using MODELPriorityQueue.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,6 +23,12 @@ namespace MODELPriorityQueue.Modals
         public AddJobDialog()
         {
             this.InitializeComponent();
+            Opened += AddJobDialog_Opened;
+        }
+
+        private async void AddJobDialog_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
+        {
+            CustomerBox.ItemsSource = await Customer.Get();
         }
 
         /// <summary>
@@ -37,8 +45,28 @@ namespace MODELPriorityQueue.Modals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            int numHours = 0;
+            if (!string.IsNullOrEmpty(EstimatedHours.Text))
+            {
+                if (!int.TryParse(EstimatedHours.Text, out numHours))
+                    return;
+            }
+
+            Customer c = CustomerBox.SelectedItem as Customer;
+            if (c == null)
+                return;
+
+            Job job = new Job()
+            {
+                Subject = Subject.Text,
+                Description = Description.Text,
+                Hours = numHours,
+                Customer = c.Id
+            };
+
+            await job.Post();
         }
     }
 }
