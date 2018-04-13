@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using MODELPriorityQueue.Models;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -13,6 +15,11 @@ namespace MODELPriorityQueue.Views
         public Settings()
         {
             this.InitializeComponent();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.LoadScreenData();
         }
 
         private async void AddManagerButton_Click(object sender, RoutedEventArgs e)

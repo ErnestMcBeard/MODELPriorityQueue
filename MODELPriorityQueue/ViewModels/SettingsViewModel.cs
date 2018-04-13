@@ -58,26 +58,39 @@ namespace MODELPriorityQueue.ViewModels
 
         }
 
-        public async Task AddManager()
+        public async Task LoadScreenData()
         {
-            if (await NewManager.Post() != default(Manager))
+            Managers = new ObservableCollection<Manager>(await Manager.Get());
+            Technicians = new ObservableCollection<Technician>(await Technician.Get());
+            Customers = new ObservableCollection<Customer>(await Customer.Get());
+        }
+
+        internal async Task AddManager()
+        {
+            var result = await NewManager.Post();
+            if (result != default(Manager))
             {
+                Managers.Add(result);
                 NewManager = new Manager();
             }
         }
 
-        public async Task AddTechnician()
+        internal async Task AddTechnician()
         {
-            if (await NewTechnician.Post() != default(Technician))
+            var result = await NewTechnician.Post();
+            if (result != default(Technician))
             {
+                Technicians.Add(result);
                 NewTechnician = new Technician();
             }
         }
 
-        public async Task AddCustomer()
+        internal async Task AddCustomer()
         {
-            if (await NewCustomer.Post() != default(Customer))
+            var result = await NewCustomer.Post();
+            if (result != default(Customer))
             {
+                Customers.Add(result);
                 NewCustomer = new Customer();
             }
         }

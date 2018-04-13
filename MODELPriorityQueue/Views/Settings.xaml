@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:MODELPriorityQueue.ViewModels"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -56,15 +57,15 @@
                         RelativePanel.AlignBottomWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
-                <TextBlock Text="Add Manager" />
+                <TextBlock Text="Add Technician" />
                 <TextBox Header="Username"
-                         Text="{Binding NewManager.Username, Mode=TwoWay}" />
+                         Text="{Binding NewTechnician.Username, Mode=TwoWay}" />
                 <TextBox Header="Password"
-                         Text="{Binding NewManager.Password, Mode=TwoWay}" />
+                         Text="{Binding NewTechnician.Password, Mode=TwoWay}" />
                 <TextBox Header="First Name"
-                         Text="{Binding NewManager.FirstName, Mode=TwoWay}" />
+                         Text="{Binding NewTechnician.FirstName, Mode=TwoWay}" />
                 <TextBox Header="Last Name"
-                         Text="{Binding NewManager.LastName, Mode=TwoWay}" />
+                         Text="{Binding NewTechnician.LastName, Mode=TwoWay}" />
                 <Button x:Name="AddTechnicianButton"
                         Content="Add Technician"
                         Click="AddTechnicianButton_Click" />

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.Web.Http;
 
@@ -99,8 +101,10 @@ namespace MODELPriorityQueue.Models
                 var requestUrl = new Uri(BaseUrl);
                 var json = JsonConvert.SerializeObject(this);
                 var client = new HttpClient();
-                var content = new HttpStringContent(json);
-                var response = await client.PostAsync(requestUrl, content);
+                var content = new HttpStringContent(json, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
+                request.Content = content;
+                var response = await client.SendRequestAsync(request);
 
                 if (!response.IsSuccessStatusCode)
                 {

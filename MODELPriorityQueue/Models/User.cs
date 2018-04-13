@@ -2,10 +2,10 @@
 {
     public abstract class User<T> : DatabaseEntity<T> where T : User<T>
     {
-        public string username;
-        public string password;
-        public string firstName;
-        public string lastName;
+        private string username;
+        private string password;
+        private string firstName;
+        private string lastName;
 
         public string Username
         {
