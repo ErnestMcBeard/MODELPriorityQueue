@@ -49,20 +49,5 @@ namespace MODELPriorityQueue.Models
             get { return state; }
             set { Set(() => State, ref state, value); }
         }
-
-        public override Task<bool> Add()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

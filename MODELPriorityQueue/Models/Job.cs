@@ -75,20 +75,5 @@ namespace MODELPriorityQueue.Models
             get { return technician; }
             set { Set(() => Technician, ref technician, value); }
         }
-
-        public override Task<bool> Add()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<bool> Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

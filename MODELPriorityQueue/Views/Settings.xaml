@@ -13,19 +13,91 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <TextBlock Text="Add Manager" />
-            <TextBox Header="Username" 
-                     Text="{Binding NewManager.Username, Mode=TwoWay}"/>
-            <TextBox Header="Password" 
-                     Text="{Binding NewManager.Password, Mode=TwoWay}"/>
-            <TextBox Header="First Name"
-                     Text="{Binding NewManager.FirstName, Mode=TwoWay}"/>
-            <TextBox Header="Last Name" 
-                     Text="{Binding NewManager.LastName, Mode=TwoWay}"/>
-            <Button x:Name="AddManagerButton"
-                    Content="Add Manager" 
-                    Click="AddManagerButton_Click" />
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <RelativePanel>
+            <ListView ItemsSource="{Binding Managers}"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Above="NewManagerPanel">
+                
+            </ListView>
+            <StackPanel x:Name="NewManagerPanel"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                <TextBlock Text="Add Manager" />
+                <TextBox Header="Username" 
+                         Text="{Binding NewManager.Username, Mode=TwoWay}"/>
+                <TextBox Header="Password" 
+                         Text="{Binding NewManager.Password, Mode=TwoWay}"/>
+                <TextBox Header="First Name"
+                         Text="{Binding NewManager.FirstName, Mode=TwoWay}"/>
+                <TextBox Header="Last Name" 
+                         Text="{Binding NewManager.LastName, Mode=TwoWay}"/>
+                <Button x:Name="AddManagerButton"
+                        Content="Add Manager" 
+                        Click="AddManagerButton_Click" />
+            </StackPanel>
+        </RelativePanel>
+        <RelativePanel Grid.Column="1">
+            <ListView ItemsSource="{Binding Technicians}"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Above="NewTechnicianPanel">
+
+            </ListView>
+            <StackPanel x:Name="NewTechnicianPanel"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                <TextBlock Text="Add Manager" />
+                <TextBox Header="Username"
+                         Text="{Binding NewManager.Username, Mode=TwoWay}" />
+                <TextBox Header="Password"
+                         Text="{Binding NewManager.Password, Mode=TwoWay}" />
+                <TextBox Header="First Name"
+                         Text="{Binding NewManager.FirstName, Mode=TwoWay}" />
+                <TextBox Header="Last Name"
+                         Text="{Binding NewManager.LastName, Mode=TwoWay}" />
+                <Button x:Name="AddTechnicianButton"
+                        Content="Add Technician"
+                        Click="AddTechnicianButton_Click" />
+            </StackPanel>
+        </RelativePanel>
+        <RelativePanel Grid.Column="2">
+            <ListView ItemsSource="{Binding Customers}"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Above="">
+                
+            </ListView>
+            <StackPanel x:Name="NewCustomerPanel"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True">
+                <TextBlock Text="Add Customer" />
+                <TextBox Header="Name"
+                         Text="{Binding NewCustomer.Name, Mode=TwoWay}" />
+                <TextBox Header="Street"
+                         Text="{Binding NewCustomer.Street, Mode=TwoWay}" />
+                <TextBox Header="City"
+                         Text="{Binding NewCustomer.City, Mode=TwoWay}" />
+                <TextBox Header="State"
+                         Text="{Binding NewCustomer.State, Mode=TwoWay}" />
+                <TextBox Header="Zip"
+                         Text="{Binding NewCustomer.Zip, Mode=TwoWay}" />
+                <Button x:Name="AddCustomerButton"
+                        Content="Add Customer"
+                        Click="AddCustomerButton_Click" />
+            </StackPanel>
+        </RelativePanel>
+
     </Grid>
 </Page>
