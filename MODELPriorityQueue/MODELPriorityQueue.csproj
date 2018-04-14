@@ -94,9 +94,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\UserTypeToBool.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Helpers\JsonIgnoreSerializationAttribute.cs" />
     <Compile Include="Helpers\JsonPropertiesResolver.cs" />
+    <Compile Include="Helpers\PageParameter.cs" />
     <Compile Include="Modals\AddJobDialog.xaml.cs">
       <DependentUpon>AddJobDialog.xaml</DependentUpon>
     </Compile>
@@ -108,6 +110,7 @@
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DatabaseEntity.cs" />
+    <Compile Include="Models\IUser.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ODataResponse.cs" />

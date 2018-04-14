@@ -7,6 +7,7 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using MODELPriorityQueue.Models;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 
 namespace MODELPriorityQueue.ViewModels
 {
@@ -38,6 +39,13 @@ namespace MODELPriorityQueue.ViewModels
         {
             get { return technicians; }
             set { Set(() => Technicians, ref technicians, value); }
+        }
+
+        private IUser loggedInUser;
+        public IUser LoggedInUser
+        {
+            get { return loggedInUser; }
+            set { Set(() => LoggedInUser, ref loggedInUser, value); }
         }
 
         private Job selectedJob;
@@ -82,9 +90,18 @@ namespace MODELPriorityQueue.ViewModels
 
         public void ExpandPropertiesForJob()
         {
-            SelectedCustomer = Customers?.Where(x => x.Id == SelectedJob.Customer).FirstOrDefault();
-            SelectedManager = Managers?.Where(x => x.Id == SelectedJob.AssignedBy).FirstOrDefault();
-            SelectedTechnician = Technicians?.Where(x => x.Id == SelectedJob.Technician).FirstOrDefault();
+            if (SelectedJob != null)
+            {
+                SelectedCustomer = Customers?.Where(x => x.Id == SelectedJob.Customer).FirstOrDefault();
+                SelectedManager = Managers?.Where(x => x.Id == SelectedJob.AssignedBy).FirstOrDefault();
+                SelectedTechnician = Technicians?.Where(x => x.Id == SelectedJob.Technician).FirstOrDefault();
+            }
+            else
+            {
+                SelectedCustomer = null;
+                SelectedManager = null;
+                SelectedTechnician = null;
+            }
         }
 
         public void MarkCompleteion()
@@ -107,9 +124,21 @@ namespace MODELPriorityQueue.ViewModels
             App.Current.NavigationService.Navigate(typeof(Views.Settings));
         }
 
-        public async Task DeletedJob()
+        public async Task DeleteJob()
         {
-            
+            if (SelectedJob != null)
+            {
+                if (await SelectedJob.Delete())
+                {
+                    // Remove the entity from the local list
+                    Jobs.Remove(SelectedJob);
+                    SelectedJob = null;
+                }
+            }
+            else
+            {
+                await new MessageDialog("Please select a job").ShowAsync();
+            }
         }
     }
 }

@@ -33,5 +33,10 @@
                     RelativePanel.Below="PasswordBox" 
                     Click="LoginButton_Click"/>
         </RelativePanel>
+        <Button x:Name="LoginAsManager"
+                Content="Login As Manager"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" 
+                Click="LoginAsManager_Click"/>
     </Grid>
 </Page>
