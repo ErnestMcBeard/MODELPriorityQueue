@@ -5,6 +5,7 @@ using System;
 using Template10.Common;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace MODELPriorityQueue.Views
 {
@@ -20,12 +21,18 @@ namespace MODELPriorityQueue.Views
 
         }
 
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+            base.OnNavigatedTo(e);
+        }
+
         private async void AddJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             // Implementation will need to be changed later.
             var dialog = new AddJobDialog();
             await dialog.ShowAsync();
-
+            await ViewModel.LoadScreenData();
         }
 
         private async void ViewStatsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -54,9 +61,9 @@ namespace MODELPriorityQueue.Views
             await ViewModel.LoadScreenData();
         }
 
-        private void DeleteJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void DeleteJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-
+            await ViewModel.DeleteJob();
         }
 
         //QUEUE STUFF

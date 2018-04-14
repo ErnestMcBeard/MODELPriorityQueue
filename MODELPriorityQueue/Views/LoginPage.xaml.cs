@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MODELPriorityQueue.Models;
+using System;
+using System.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +31,18 @@ namespace MODELPriorityQueue.Views
                 ViewModel.NavigateToMainPage();
             }
             ViewModel.IsLoading = false;
+        }
+
+        /// <summary>
+        /// Temporary for skipping authentication but logging in a manager.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void LoginAsManager_Click(object sender, RoutedEventArgs e)
+        {
+            var managers = await Manager.Get();
+            var manager = managers.FirstOrDefault();
+            App.Current.NavigationService.Navigate(typeof(Views.MainPage), manager.Id);
         }
     }
 }

@@ -99,12 +99,11 @@ namespace MODELPriorityQueue.Models
             try
             {
                 var requestUrl = new Uri(BaseUrl);
-                var json = JsonConvert.SerializeObject(this);
-                var client = new HttpClient();
-                var content = new HttpStringContent(json, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json");
-                var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
-                request.Content = content;
-                var response = await client.SendRequestAsync(request);
+                var request = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl))
+                {
+                    Content = new HttpStringContent(JsonConvert.SerializeObject(this), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json")
+                };
+                var response = await new HttpClient().SendRequestAsync(request);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -126,10 +125,31 @@ namespace MODELPriorityQueue.Models
         /// <summary>
         /// Sends this object to the database, and updates its fields on the server
         /// </summary>
-        //public async Task<E> Update()
-        //{
+        public async Task<T> Update()
+        {
+            try
+            {
+                var requestUrl = new Uri(BaseUrl);
+                var request = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl))
+                {
+                    Content = new HttpStringContent(JsonConvert.SerializeObject(this), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json")
+                };
+                var response = await new HttpClient().SendRequestAsync(request);
 
-        //}
+                if (!response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog(response.StatusCode.ToString()).ShowAsync();
+                    return default(T);
+                }
+                var responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(responseString);
+            }
+            catch (Exception e)
+            {
+                await new MessageDialog(e.ToString()).ShowAsync();
+                return default(T);
+            }
+        }
 
 
 
@@ -140,13 +160,7 @@ namespace MODELPriorityQueue.Models
         {
             try
             {
-                var requestUrl = new Uri(BaseUrl);
-                var json = JsonConvert.SerializeObject(this);
-                var client = new HttpClient();
-                var content = new HttpStringContent(json, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json");
-                var request = new HttpRequestMessage(HttpMethod.Delete, requestUrl);
-                request.Content = content;
-                var response = await client.SendRequestAsync(request);
+                var response = await new HttpClient().DeleteAsync(new Uri(String.Format("{0}({1})", BaseUrl, this.Id)));
 
                 if (!response.IsSuccessStatusCode)
                 {

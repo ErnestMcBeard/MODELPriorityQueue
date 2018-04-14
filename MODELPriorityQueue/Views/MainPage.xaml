@@ -168,9 +168,11 @@
                   Grid.Row="1"/>
 
             <!--#region Read Only Left Column-->
-            <RelativePanel Margin="0,0,8,0" Grid.Row="1">
+            <RelativePanel Margin="0,0,8,0" 
+                           Grid.Row="1"
+                           Visibility="{Binding LoggedInuser, Converter={StaticResource UserTypeToVisibilityConverter}}">
                 <TextBlock x:Name="Description"
-                           Text="{Binding SelectedJob.Subject}"
+                           Text="{Binding SelectedJob.Description}"
                            Margin="0,0,0,12" />
                 <TextBlock x:Name="Hours"
                            Margin="0,0,0,12"
@@ -196,7 +198,31 @@
             <!--#endregion-->
             
             <!--#region Editable Left Column-->
-            
+            <RelativePanel Margin="0,0,8,0"
+                           Grid.Row="1"
+                           Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}}">
+                <TextBox x:Name="DescriptionBox"
+                         Text="{Binding SelectedJob.Description, Mode=TwoWay}" 
+                         Margin="0,0,0,12"/>
+                <TextBox x:Name="HoursBox"
+                         Margin="0,0,0,12"
+                         RelativePanel.Below="DescriptionBox" />
+                <TextBlock x:Name="CreatedByBox"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="HoursBox">
+                    <Run Text="Created By:" />
+                    <Run Text="{Binding SelectedManager.FirstName}" />
+                    <Run Text="{Binding SelectedManager.LastName}" />
+                </TextBlock>
+                <TextBlock x:Name="AssignedToBox"
+                           Margin="0,0,0,12"
+                           RelativePanel.Below="CreatedByBox">
+                    <Run Text="Assigned To:" />
+                    <Run Text="{Binding SelectedTechnician.FirstName}" />
+                    <Run Text="{Binding SelectedTechnician.LastName}" />
+                </TextBlock>
+
+            </RelativePanel>
             <!--#endregion-->
             
             <!--#region Customer Right Column-->
