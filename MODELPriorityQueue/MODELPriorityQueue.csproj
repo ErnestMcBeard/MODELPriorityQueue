@@ -95,8 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="Helpers\JsonIgnoreSerializationAttribute.cs" />
+    <Compile Include="Helpers\JsonPropertiesResolver.cs" />
     <Compile Include="Modals\AddJobDialog.xaml.cs">
       <DependentUpon>AddJobDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\GenerateBillDialog.xaml.cs">
+      <DependentUpon>GenerateBillDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\StatsDialog.xaml.cs">
       <DependentUpon>StatsDialog.xaml</DependentUpon>
@@ -144,6 +149,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Modals\AddJobDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\GenerateBillDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

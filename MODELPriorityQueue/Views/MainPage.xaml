@@ -53,7 +53,8 @@
                         Width="40"
                         RelativePanel.LeftOf="AddJobButton"
                         RelativePanel.AlignTopWithPanel="True"
-                        RelativePanel.AlignBottomWithPanel="True">
+                        RelativePanel.AlignBottomWithPanel="True"
+                        Click="DeleteJobButton_Click">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                Text="&#59213;"
                                Foreground="{ThemeResource ApplicationFontColor}" />
@@ -176,13 +177,15 @@
                            Margin="0,0,0,12"
                            RelativePanel.Below="Hours">
                     <Run Text="Created By:" />
-                    <Run Text="" />
+                    <Run Text="{Binding SelectedManager.FirstName}" />
+                    <Run Text="{Binding SelectedManager.LastName}" />
                 </TextBlock>
                 <TextBlock x:Name="AssignedTo"
                            Margin="0,0,0,12"
                            RelativePanel.Below="CreatedBy">
                     <Run Text="Assigned To:" />
-                    <Run Text="" />
+                    <Run Text="{Binding SelectedTechnician.FirstName}" />
+                    <Run Text="{Binding SelectedTechnician.LastName}" />
                 </TextBlock>
             </RelativePanel>
             <!--#endregion-->

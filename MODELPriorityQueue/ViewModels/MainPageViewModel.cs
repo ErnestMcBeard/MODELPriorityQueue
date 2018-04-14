@@ -26,6 +26,20 @@ namespace MODELPriorityQueue.ViewModels
             set { Set(() => Customers, ref customers, value); }
         }
 
+        private ObservableCollection<Manager> managers;
+        public ObservableCollection<Manager> Managers
+        {
+            get { return managers; }
+            set { Set(() => Managers, ref managers, value); }
+        }
+
+        private ObservableCollection<Technician> technicians;
+        public ObservableCollection<Technician> Technicians
+        {
+            get { return technicians; }
+            set { Set(() => Technicians, ref technicians, value); }
+        }
+
         private Job selectedJob;
         public Job SelectedJob
         {
@@ -33,7 +47,7 @@ namespace MODELPriorityQueue.ViewModels
             set
             {
                 Set(() => SelectedJob, ref selectedJob, value);
-                GetCustomerForJob();
+                ExpandPropertiesForJob();
             }
         }
 
@@ -44,15 +58,33 @@ namespace MODELPriorityQueue.ViewModels
             set { Set(() => SelectedCustomer, ref selectedCustomer, value); }
         }
 
+        private Manager selectedManager;
+        public Manager SelectedManager
+        {
+            get { return selectedManager; }
+            set { Set(() => SelectedManager, ref selectedManager, value); }
+        }
+
+        private Technician selectedTechnician;
+        public Technician SelectedTechnician
+        {
+            get { return selectedTechnician; }
+            set { Set(() => SelectedTechnician, ref selectedTechnician, value); }
+        }
+
         public async Task LoadScreenData()
         {
             Jobs = new ObservableCollection<Job>(await Job.Get());
             Customers = new ObservableCollection<Customer>(await Customer.Get());
+            Managers = new ObservableCollection<Manager>(await Manager.Get());
+            Technicians = new ObservableCollection<Technician>(await Technician.Get());
         }
 
-        public void GetCustomerForJob()
+        public void ExpandPropertiesForJob()
         {
-            SelectedCustomer = Customers.Where(x => x.Id == SelectedJob.Customer).FirstOrDefault();
+            SelectedCustomer = Customers?.Where(x => x.Id == SelectedJob.Customer).FirstOrDefault();
+            SelectedManager = Managers?.Where(x => x.Id == SelectedJob.AssignedBy).FirstOrDefault();
+            SelectedTechnician = Technicians?.Where(x => x.Id == SelectedJob.Technician).FirstOrDefault();
         }
 
         public void MarkCompleteion()
@@ -73,6 +105,11 @@ namespace MODELPriorityQueue.ViewModels
         public void NavigateToSettingsPage()
         {
             App.Current.NavigationService.Navigate(typeof(Views.Settings));
+        }
+
+        public async Task DeletedJob()
+        {
+            
         }
     }
 }

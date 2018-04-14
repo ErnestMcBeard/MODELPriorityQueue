@@ -136,9 +136,33 @@ namespace MODELPriorityQueue.Models
         /// <summary>
         /// Removes this object to the database
         /// </summary>
-        //public async Task<E> Delete()
-        //{
+        public async Task<bool> Delete()
+        {
+            try
+            {
+                var requestUrl = new Uri(BaseUrl);
+                var json = JsonConvert.SerializeObject(this);
+                var client = new HttpClient();
+                var content = new HttpStringContent(json, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Delete, requestUrl);
+                request.Content = content;
+                var response = await client.SendRequestAsync(request);
 
-        //}
+                if (!response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog(response.StatusCode.ToString()).ShowAsync();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                await new MessageDialog(e.ToString()).ShowAsync();
+                return false;
+            }
+        }
     }
 }

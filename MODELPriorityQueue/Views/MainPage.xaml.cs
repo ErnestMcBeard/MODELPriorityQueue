@@ -46,5 +46,10 @@ namespace MODELPriorityQueue.Views
         {
             await ViewModel.LoadScreenData();
         }
+
+        private void DeleteJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+        }
     }
 }
