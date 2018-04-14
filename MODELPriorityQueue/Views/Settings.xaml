@@ -66,6 +66,8 @@
                          Text="{Binding NewTechnician.FirstName, Mode=TwoWay}" />
                 <TextBox Header="Last Name"
                          Text="{Binding NewTechnician.LastName, Mode=TwoWay}" />
+                <CalendarDatePicker Header="Start Date"
+                                    Date="{Binding NewTechnician.StartDate, Mode=TwoWay}" />
                 <Button x:Name="AddTechnicianButton"
                         Content="Add Technician"
                         Click="AddTechnicianButton_Click" />

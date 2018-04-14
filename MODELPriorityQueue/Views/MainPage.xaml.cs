@@ -33,12 +33,18 @@ namespace MODELPriorityQueue.Views
 
         private void CompletedButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-         //This somehow needs to reference the MainPageViewModel   
+            
+            //This somehow needs to reference the MainPageViewModel   
         }
 
         private void SettingsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             ViewModel.NavigateToSettingsPage();
+        }
+
+        private async void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.LoadScreenData();
         }
     }
 }

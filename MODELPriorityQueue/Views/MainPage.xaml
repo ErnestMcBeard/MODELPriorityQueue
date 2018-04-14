@@ -7,7 +7,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:MODELPriorityQueue.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:MODELPriorityQueue.ViewModels" mc:Ignorable="d">
+      xmlns:vm="using:MODELPriorityQueue.ViewModels" 
+      Loaded="Page_Loaded"
+      mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />
@@ -81,6 +83,11 @@
                                Foreground="{ThemeResource ApplicationFontColor}" />
                 </Button>
             </RelativePanel>
+
+            <ListView x:Name="JobsList"
+                      ItemsSource="{Binding Jobs}"
+                      SelectedValue="{Binding SelectedJob, Mode=TwoWay}" 
+                      Grid.Row="1" />
         </Grid>
         <!--#endregion-->
         
@@ -112,7 +119,7 @@
                            Margin="0,0,0,12">
                 <TextBlock x:Name="Subject"
                            Style="{ThemeResource SubheaderTextBlockStyle}"
-                           Text="Subject" />
+                           Text="{Binding SelectedJob.Subject}" />
                 <Button x:Name="PaymentButton"
                         Style="{ThemeResource ButtonStyle}"
                         Height="48"
@@ -157,31 +164,25 @@
             <!--#region Read Only Left Column-->
             <RelativePanel Margin="0,0,8,0" Grid.Row="1">
                 <TextBlock x:Name="Description"
-                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam fermentum tellus eget varius. Donec ultricies lectus eu malesuada pellentesque. Morbi tincidunt ex eu leo varius pellentesque. Nunc malesuada nibh id elit viverra tempor id et est. Donec aliquam rhoncus metus, vitae commodo dolor malesuada eget. Nam pulvinar sapien a diam euismod porttitor. Suspendisse arcu neque, vulputate et ipsum rhoncus, rhoncus pharetra enim." 
+                           Text="{Binding SelectedJob.Subject}"
                            Margin="0,0,0,12" />
-                <TextBlock x:Name="EstimatedHours"
+                <TextBlock x:Name="Hours"
                            Margin="0,0,0,12"
                            RelativePanel.Below="Description">
                     <Run Text="Estimated Hours:" />
-                    <Run Text="3" />
-                </TextBlock>
-                <TextBlock x:Name="ActualHours"
-                           Margin="0,0,0,12"
-                           RelativePanel.Below="EstimatedHours">
-                    <Run Text="Actual Hours:" />
-                    <Run Text="4" />
+                    <Run Text="{Binding SelectedJob.Hours}" />
                 </TextBlock>
                 <TextBlock x:Name="CreatedBy"
                            Margin="0,0,0,12"
-                           RelativePanel.Below="ActualHours">
+                           RelativePanel.Below="Hours">
                     <Run Text="Created By:" />
-                    <Run Text="Smitty Werbenjagermanjensen" />
+                    <Run Text="" />
                 </TextBlock>
                 <TextBlock x:Name="AssignedTo"
                            Margin="0,0,0,12"
                            RelativePanel.Below="CreatedBy">
                     <Run Text="Assigned To:" />
-                    <Run Text="Roman Jones" />
+                    <Run Text="" />
                 </TextBlock>
             </RelativePanel>
             <!--#endregion-->
@@ -213,37 +214,37 @@
                 <TextBlock x:Name="Name"
                            RelativePanel.Below="Customer">
                     <Run Text="Name:" />
-                    <Run Text="John Doe" />
+                    <Run Text="{Binding SelectedCustomer.Name}" />
                 </TextBlock>
                 <TextBlock x:Name="Address"
                            RelativePanel.Below="Name">
                     <Run Text="Address:" />
-                    <Run Text="1234 Some St." />
+                    <Run Text="{Binding SelectedCustomer.Street}" />
                 </TextBlock>
                 <TextBlock x:Name="City"
                            RelativePanel.Below="Address">
                     <Run Text="City: " />
-                    <Run Text="Baton Rouge" />
+                    <Run Text="{Binding SelectedCustomer.City}" />
                 </TextBlock>
                 <TextBlock x:Name="State"
                            RelativePanel.Below="City">
                     <Run Text="State: " />
-                    <Run Text="LA" />
+                    <Run Text="{Binding SelectedCustomer.State}" />
                 </TextBlock>
                 <TextBlock x:Name="Zip"
                            RelativePanel.Below="State">
                     <Run Text="Zip: " />
-                    <Run Text="70808" />
+                    <Run Text="{Binding SelectedCustomer.Zip}" />
                 </TextBlock>
                 <TextBlock x:Name="Phone"
                            RelativePanel.Below="Zip">
                     <Run Text="Phone: " />
-                    <Run Text="(123) 555-1234" />
+                    <Run Text="{Binding SelectedCustomer.Phone}" />
                 </TextBlock>
                 <TextBlock x:Name="Serviced"
                            RelativePanel.Below="Phone">
                     <Run Text="Times Serviced:" />
-                    <Run Text="4" />
+                    <Run Text="{Binding SelectedCustomer.TimesServiced}" />
                 </TextBlock>
             </RelativePanel>
             <!--#endregion-->

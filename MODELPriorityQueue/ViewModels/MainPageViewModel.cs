@@ -19,13 +19,41 @@ namespace MODELPriorityQueue.ViewModels
             set { Set(() => Jobs, ref jobs, value); }
         }
 
+        private ObservableCollection<Customer> customers;
+        public ObservableCollection<Customer> Customers
+        {
+            get { return customers; }
+            set { Set(() => Customers, ref customers, value); }
+        }
+
         private Job selectedJob;
         public Job SelectedJob
         {
             get { return selectedJob; }
-            set { Set(() => SelectedJob, ref selectedJob, value); }
+            set
+            {
+                Set(() => SelectedJob, ref selectedJob, value);
+                GetCustomerForJob();
+            }
         }
 
+        private Customer selectedCustomer;
+        public Customer SelectedCustomer
+        {
+            get { return selectedCustomer; }
+            set { Set(() => SelectedCustomer, ref selectedCustomer, value); }
+        }
+
+        public async Task LoadScreenData()
+        {
+            Jobs = new ObservableCollection<Job>(await Job.Get());
+            Customers = new ObservableCollection<Customer>(await Customer.Get());
+        }
+
+        public void GetCustomerForJob()
+        {
+            SelectedCustomer = Customers.Where(x => x.Id == SelectedJob.Customer).FirstOrDefault();
+        }
 
         public void MarkCompleteion()
         {
