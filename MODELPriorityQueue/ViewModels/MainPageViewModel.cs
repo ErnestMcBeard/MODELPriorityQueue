@@ -104,7 +104,7 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
-        public void MarkCompleteion()
+        public void MarkCompleted()
         {
             /*
              * The logic for this code should go something like this:
@@ -122,6 +122,14 @@ namespace MODELPriorityQueue.ViewModels
         public void NavigateToSettingsPage()
         {
             App.Current.NavigationService.Navigate(typeof(Views.Settings));
+        }
+
+        public async Task SaveJob()
+        {
+            if (SelectedJob != null)
+            {
+                await SelectedJob.Update();
+            }
         }
 
         public async Task DeleteJob()

@@ -41,8 +41,8 @@ namespace MODELPriorityQueue.Views
         private async void LoginAsManager_Click(object sender, RoutedEventArgs e)
         {
             var managers = await Manager.Get();
-            var manager = managers.FirstOrDefault();
-            App.Current.NavigationService.Navigate(typeof(Views.MainPage), manager.Id);
+            App.LoggedInUser = managers.FirstOrDefault();
+            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(MainPage));
         }
     }
 }

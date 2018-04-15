@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MODELPriorityQueue.Models;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
@@ -11,6 +12,8 @@ namespace MODELPriorityQueue
     [Bindable]
     sealed partial class App : Template10.Common.BootStrapper
     {
+        public static IUser LoggedInUser { get; set; }
+
         public App()
         {
             InitializeComponent();

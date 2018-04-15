@@ -1,7 +1,6 @@
 ﻿using MODELPriorityQueue.Modals;
-using MODELPriorityQueue.Models;
-using MODELPriorityQueue.ViewModels;
 using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -12,16 +11,10 @@ namespace MODELPriorityQueue.Views
         public MainPage()
         {
             InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            base.OnNavigatedTo(e);
-        }
-
-        private async void AddJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void AddJobButton_Click(object sender, RoutedEventArgs e)
         {
             // Implementation will need to be changed later.
             var dialog = new AddJobDialog();
@@ -29,33 +22,32 @@ namespace MODELPriorityQueue.Views
             await ViewModel.LoadScreenData();
         }
 
-        private async void ViewStatsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void ViewStatsButton_Click(object sender, RoutedEventArgs e)
         {
             await new StatsDialog().ShowAsync();
         }
 
-        private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            //Auto generated method This is where the function call to the back end will go. I assume
+            await ViewModel.SaveJob();
         }
 
-        private void CompletedButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void CompletedButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            //This somehow needs to reference the MainPageViewModel   
+            ViewModel.MarkCompleted();
         }
 
-        private void SettingsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.NavigateToSettingsPage();
         }
 
-        private async void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await ViewModel.LoadScreenData();
         }
 
-        private async void DeleteJobButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void DeleteJobButton_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.DeleteJob();
         }
