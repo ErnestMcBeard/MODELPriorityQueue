@@ -88,7 +88,12 @@
             <ListView x:Name="JobsList"
                       ItemsSource="{Binding Jobs}"
                       SelectedValue="{Binding SelectedJob, Mode=TwoWay}" 
-                      Grid.Row="1" />
+                      Grid.Row="1"
+                      ShowsScrollingPlaceholders="False"
+                      ContainerContentChanging="JobsList_ContainerContentChanging"
+                      CanReorderItems="True"
+                      AllowDrop="True" SelectionChanged="JobsList_SelectionChanged"
+                      />
         </Grid>
         <!--#endregion-->
         
