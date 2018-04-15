@@ -65,13 +65,13 @@ namespace MODELPriorityQueue.Views
         void JobsList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
             QueueJob queueJob = args.ItemContainer.ContentTemplateRoot as QueueJob;
-
             if(args.InRecycleQueue == true)
             {
                 queueJob.ClearData();
             }
             else if(args.Phase == 0)
             {
+                //This is where the queueJob gets passed the Job object
                 queueJob?.ShowPlaceholder(args.Item as Job);
                 args.RegisterUpdateCallback(ContainerContentChangingDelegate);
             }
@@ -82,6 +82,7 @@ namespace MODELPriorityQueue.Views
             }
             else if(args.Phase == 2)
             {
+                ViewModel.UpdateQueueOrder();
                 queueJob?.ShowCategory();
                 queueJob?.ShowImage();
             }

@@ -120,6 +120,30 @@ namespace MODELPriorityQueue.ViewModels
             //I believe the view will update whenever this changes?
         }
 
+        public void UpdateQueueOrder()
+        {
+            foreach(Job currenntJob in Jobs)
+            {
+                if(Jobs.IndexOf(currenntJob) == 0)
+                {
+                    //Allegedly this is how you null a Guid value
+                    currenntJob.PreviousJob = Guid.Empty;
+                }
+                else
+                {
+                    currenntJob.PreviousJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob)-1).Id;
+                }
+                if(Jobs.IndexOf(currenntJob) == Jobs.Count - 1)
+                {
+                    currenntJob.NextJob = Guid.Empty;
+                }
+                else
+                {
+                    currenntJob.NextJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Id;
+                }
+            }
+        }
+
         public void NavigateToSettingsPage()
         {
             App.Current.NavigationService.Navigate(typeof(Views.Settings));
