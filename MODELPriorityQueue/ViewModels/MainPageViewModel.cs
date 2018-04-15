@@ -173,5 +173,14 @@ namespace MODELPriorityQueue.ViewModels
                 await new MessageDialog("Please select a job").ShowAsync();
             }
         }
+
+        public async Task AssignTechnician()
+        {
+            if (SelectedJob != null && App.LoggedInUser.GetType() == typeof(Technician))
+            {
+                SelectedJob.Technician = LoggedInUser.Id;
+                await SelectedJob.Update();
+            }
+        }
     }
 }

@@ -130,7 +130,7 @@ namespace MODELPriorityQueue.Models
             try
             {
                 var requestUrl = new Uri(BaseUrl);
-                var request = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl))
+                var request = new HttpRequestMessage(HttpMethod.Put, new Uri(String.Format("{0}({1})", BaseUrl, this.Id)))
                 {
                     Content = new HttpStringContent(JsonConvert.SerializeObject(this), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json")
                 };

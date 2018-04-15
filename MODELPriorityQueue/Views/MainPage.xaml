@@ -153,7 +153,9 @@
                         Height="48"
                         Width="48"
                         ToolTipService.ToolTip="Assign Self to Job"
-                        RelativePanel.LeftOf="PaymentButton">
+                        Click="AssignTechnician_Click"
+                        RelativePanel.LeftOf="PaymentButton"
+                        Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}}">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                Text="&#xE8FA;"
                                FontSize="20" />
@@ -171,7 +173,8 @@
                 <Button x:Name="SaveButton"
                         Content="Save Changes" 
                         Margin="4,4,2,4"
-                        RelativePanel.LeftOf="CompletedButton" Click="SaveButton_Click" />
+                        RelativePanel.LeftOf="CompletedButton" Click="SaveButton_Click" 
+                        Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}, ConverterParameter='i'}"/>
             </RelativePanel>
 
             <Grid Background="Black"
@@ -289,13 +292,8 @@
                     <Run Text="Zip: " />
                     <Run Text="{Binding SelectedCustomer.Zip}" />
                 </TextBlock>
-                <TextBlock x:Name="Phone"
-                           RelativePanel.Below="Zip">
-                    <Run Text="Phone: " />
-                    <Run Text="{Binding SelectedCustomer.Phone}" />
-                </TextBlock>
                 <TextBlock x:Name="Serviced"
-                           RelativePanel.Below="Phone">
+                           RelativePanel.Below="Zip">
                     <Run Text="Times Serviced:" />
                     <Run Text="{Binding SelectedCustomer.TimesServiced}" />
                 </TextBlock>
