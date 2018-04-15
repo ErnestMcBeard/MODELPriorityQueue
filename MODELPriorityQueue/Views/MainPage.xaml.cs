@@ -1,8 +1,8 @@
 ﻿using MODELPriorityQueue.Modals;
+using MODELPriorityQueue.Models;
 using System;
-using Windows.UI.Xaml;
-using Template10.Common;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -10,8 +10,6 @@ namespace MODELPriorityQueue.Views
 {
     public sealed partial class MainPage : Page
     {
-
-
         public MainPage()
         {
             InitializeComponent();
@@ -74,18 +72,18 @@ namespace MODELPriorityQueue.Views
             }
             else if(args.Phase == 0)
             {
-                queueJob.ShowPlaceholder(args.Item as Job);
+                queueJob?.ShowPlaceholder(args.Item as Job);
                 args.RegisterUpdateCallback(ContainerContentChangingDelegate);
             }
             else if(args.Phase == 1)
             {
-                queueJob.ShowTitle();
+                queueJob?.ShowTitle();
                 args.RegisterUpdateCallback(ContainerContentChangingDelegate);
             }
             else if(args.Phase == 2)
             {
-                queueJob.ShowCategory();
-                queueJob.ShowImage();
+                queueJob?.ShowCategory();
+                queueJob?.ShowImage();
             }
 
             args.Handled = true;

@@ -92,8 +92,20 @@
                       ShowsScrollingPlaceholders="False"
                       ContainerContentChanging="JobsList_ContainerContentChanging"
                       CanReorderItems="True"
-                      AllowDrop="True" SelectionChanged="JobsList_SelectionChanged"
-                      />
+                      AllowDrop="True" 
+                      SelectionChanged="JobsList_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:QueueJob />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
         <!--#endregion-->
         
@@ -170,7 +182,7 @@
             <!--#region Read Only Left Column-->
             <RelativePanel Margin="0,0,8,0" 
                            Grid.Row="1"
-                           Visibility="{Binding LoggedInuser, Converter={StaticResource UserTypeToVisibilityConverter}}">
+                           Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}}">
                 <TextBlock x:Name="Description"
                            Text="{Binding SelectedJob.Description}"
                            Margin="0,0,0,12" />
@@ -200,11 +212,16 @@
             <!--#region Editable Left Column-->
             <RelativePanel Margin="0,0,8,0"
                            Grid.Row="1"
-                           Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}}">
+                           Visibility="{Binding LoggedInUser, Converter={StaticResource UserTypeToVisibilityConverter}, ConverterParameter='i'}">
                 <TextBox x:Name="DescriptionBox"
-                         Text="{Binding SelectedJob.Description, Mode=TwoWay}" 
-                         Margin="0,0,0,12"/>
+                         Header="Description"
+                         Text="{Binding SelectedJob.Description, Mode=TwoWay}"
+                         Margin="0,0,0,12" 
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True" />
                 <TextBox x:Name="HoursBox"
+                         Header="Hours"
+                         Text="{Binding SelectedJob.Hours, Mode=TwoWay}"
                          Margin="0,0,0,12"
                          RelativePanel.Below="DescriptionBox" />
                 <TextBlock x:Name="CreatedByBox"
@@ -214,13 +231,15 @@
                     <Run Text="{Binding SelectedManager.FirstName}" />
                     <Run Text="{Binding SelectedManager.LastName}" />
                 </TextBlock>
-                <TextBlock x:Name="AssignedToBox"
-                           Margin="0,0,0,12"
-                           RelativePanel.Below="CreatedByBox">
-                    <Run Text="Assigned To:" />
-                    <Run Text="{Binding SelectedTechnician.FirstName}" />
-                    <Run Text="{Binding SelectedTechnician.LastName}" />
-                </TextBlock>
+                <ComboBox x:Name="AssignedToBox"
+                          Header="AssignedTo"
+                          ItemsSource="{Binding Technicians}"
+                          DisplayMemberPath="Username"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding SelectedJob.Technician, Mode=TwoWay}"
+                          Width="200"
+                          Margin="0,0,0,12"
+                          RelativePanel.Below="CreatedByBox" />
 
             </RelativePanel>
             <!--#endregion-->

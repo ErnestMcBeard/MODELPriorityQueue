@@ -82,6 +82,7 @@ namespace MODELPriorityQueue.ViewModels
 
         public async Task LoadScreenData()
         {
+            LoggedInUser = App.LoggedInUser;
             Jobs = new ObservableCollection<Job>(await Job.Get());
             Customers = new ObservableCollection<Customer>(await Customer.Get());
             Managers = new ObservableCollection<Manager>(await Manager.Get());
