@@ -44,5 +44,12 @@ namespace MODELPriorityQueue.Views
             App.LoggedInUser = managers.FirstOrDefault();
             Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(MainPage));
         }
+
+        private async void LoginAsTechnician_Click(object sender, RoutedEventArgs e)
+        {
+            var technicians = await Technician.Get();
+            App.LoggedInUser = technicians.FirstOrDefault();
+            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(MainPage));
+        }
     }
 }

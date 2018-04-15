@@ -38,5 +38,10 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" 
                 Click="LoginAsManager_Click"/>
+        <Button x:Name="LoginAsTechnician"
+                Content="Login As Technician"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="LoginAsTechnician_Click"/>
     </Grid>
 </Page>

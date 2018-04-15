@@ -102,5 +102,9 @@ namespace MODELPriorityQueue.Views
             }
         }
 
+        private async void AssignTechnician_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.AssignTechnician();
+        }
     }
 }

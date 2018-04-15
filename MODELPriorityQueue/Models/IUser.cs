@@ -8,5 +8,6 @@ namespace MODELPriorityQueue.Models
 {
     public interface IUser
     {
+        Guid Id { get; set; }
     }
 }
