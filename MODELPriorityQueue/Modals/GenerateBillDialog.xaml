@@ -7,8 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Bill"
-    SecondaryButtonText="Close"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick" FontFamily="Segoe UI">
+    PrimaryButtonText="Calculate"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <RelativePanel.Resources>
@@ -22,17 +24,9 @@
                         Value="0,0,0,12" />
             </Style>
         </RelativePanel.Resources>
-        <TextBlock x:Name="MODEL">
-            <Run Text="MODEL Computing Services" />
+        <TextBlock x:Name="BillCreation">
+            <Run Text="Enter hours worked and press 'Calculate'" />
         </TextBlock>
-        <TextBox x:Name="PayRate"
-                 PlaceholderText="Enter Pay/Hour"
-                 Text="" 
-                 Width="120"
-                 Margin="2" 
-                 Grid.ColumnSpan="2" 
-                 RelativePanel.AlignLeftWithPanel="True"
-                 RelativePanel.Below="MODEL"/>
         <TextBox x:Name="HoursWorked"
                  PlaceholderText="Enter Hours"
                  Text="" 
@@ -40,17 +34,8 @@
                  Margin="2"
                  Grid.ColumnSpan="2" 
                  RelativePanel.AlignLeftWithPanel="True"
-                 RelativePanel.Below="PayRate"/>
-        <Button x:Name="CalculateButton"
-                Content="Calculate"
-                Margin="0,0,0,4"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.RightOf="HoursWorked"
-                RelativePanel.AlignBottomWith="HoursWorked"/>
-        <TextBlock x:Name="resultTxtBox" 
-                 HorizontalAlignment="Left" 
-                 Margin="3" 
-                 Text=""  
-                 RelativePanel.Below="CalculateButton"/>
+                 RelativePanel.Below="BillCreation"/>
+        
     </RelativePanel>
 </ContentDialog>
+    
