@@ -126,32 +126,34 @@ namespace MODELPriorityQueue.ViewModels
             {
                 //This code will only execute if the Job that is moved is moved above one that has a lower priority then it. 
                 //This prevents a call from Prioritize Queue from ruining the queue order.
-                if(currenntJob.Priority > Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority)
+                if (Jobs.IndexOf(currenntJob) != Jobs.Count - 1)
                 {
-                    currenntJob.Priority = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority;
+                    if (currenntJob.Priority > Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority)
+                    {
+                        currenntJob.Priority = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority;
+                    }
                 }
-
                 if(Jobs.IndexOf(currenntJob) == 0)
                 {
                     //Allegedly this is how you null a Guid value
                     currenntJob.PreviousJob = Guid.Empty;
-                    await currenntJob.Update();
+                    //await currenntJob.Update();
 
                 }
                 else
                 {
                     currenntJob.PreviousJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob)-1).Id;
-                    await currenntJob.Update();
+                    //await currenntJob.Update();
                 }
                 if(Jobs.IndexOf(currenntJob) == Jobs.Count - 1)
                 {
                     currenntJob.NextJob = Guid.Empty;
-                    await currenntJob.Update();
+                    //await currenntJob.Update();
                 }
                 else
                 {
                     currenntJob.NextJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Id;
-                    await currenntJob.Update();
+                    //await currenntJob.Update();
                 }
             }
         }
