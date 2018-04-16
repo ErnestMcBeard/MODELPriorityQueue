@@ -67,7 +67,7 @@ namespace MODELPriorityQueue.Views
             //Nothing
         }
 
-        void JobsList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        async void JobsList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
             QueueJob queueJob = args.ItemContainer.ContentTemplateRoot as QueueJob;
             if(args.InRecycleQueue == true)
@@ -87,7 +87,7 @@ namespace MODELPriorityQueue.Views
             }
             else if(args.Phase == 2)
             {
-                ViewModel.UpdateQueueOrder();
+                await ViewModel.UpdateQueueOrder();
                 queueJob?.ShowCategory();
                 queueJob?.ShowImage();
             }
@@ -113,9 +113,14 @@ namespace MODELPriorityQueue.Views
             await ViewModel.AssignTechnician();
         }
 
-        private async void Prioritize()
+        private void Prioritize()
         {
-            await ViewModel.PrioritizeQueue();
+            ViewModel.PrioritizeQueue();
+        }
+
+        private async void SetPriorities()
+        {
+            await ViewModel.SetPrioritiesInQueue();
         }
     }
 }
