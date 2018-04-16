@@ -64,7 +64,7 @@ namespace MODELPriorityQueue.Views
 
         private void JobsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            //Nothing
         }
 
         void JobsList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
@@ -111,6 +111,11 @@ namespace MODELPriorityQueue.Views
         private async void AssignTechnician_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.AssignTechnician();
+        }
+
+        private async void Prioritize()
+        {
+            await ViewModel.PrioritizeQueue();
         }
     }
 }

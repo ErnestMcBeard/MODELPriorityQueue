@@ -49,5 +49,27 @@ namespace MODELPriorityQueue.Models
             get { return state; }
             set { Set(() => State, ref state, value); }
         }
+
+        public int Priority()
+        {
+            if(timesServiced >= 5)
+            {
+                return 1;
+            }
+            else if(timesServiced >= 3)
+            {
+                return 2;
+            }
+            else if(timesServiced >= 1)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+            
+
+        }
     }
 }

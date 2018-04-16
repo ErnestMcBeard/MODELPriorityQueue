@@ -144,6 +144,28 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
+        public async Task PrioritizeQueue()
+        {
+            foreach (Job currentJob in Jobs)
+            {
+                Customer currentJobsCustomer = await Customer.Get(currentJob.Customer);
+                Customer nextJobsCustomer = await Customer.Get(Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1).Customer);
+
+                if (currentJobsCustomer.Priority() < nextJobsCustomer.Priority())
+                {
+                    continue;
+                }
+                else
+                {
+                    Job temp = Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1);
+                    Jobs.RemoveAt(Jobs.IndexOf(currentJob) + 1);
+                    Jobs.Insert((Jobs.IndexOf(currentJob) + 1), currentJob);
+                    Jobs.Insert(Jobs.IndexOf(currentJob), temp);
+                    Jobs.Remove(currentJob);
+                }   
+            }
+        }
+
         public void NavigateToSettingsPage()
         {
             App.Current.NavigationService.Navigate(typeof(Views.Settings));
