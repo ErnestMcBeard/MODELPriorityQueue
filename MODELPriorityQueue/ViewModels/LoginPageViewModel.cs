@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MODELPriorityQueue.Models;
+using System.Threading.Tasks;
 using Template10.Mvvm;
 
 namespace MODELPriorityQueue.ViewModels
@@ -37,7 +38,15 @@ namespace MODELPriorityQueue.ViewModels
         /// <returns></returns>
         public async Task<bool> AttemptLogin()
         {
-            return true;
+            IUser potentialAccount = await Manager.Get("where Username eq " + Username);
+            if (potentialAccount == default(Manager))
+            {
+                potentialAccount = await Technician.Get("where Username eq " + Username);
+                if (potentialAccount == default(Technician))
+                    return false;
+            }
+            App.LoggedInUser = potentialAccount;
+            return potentialAccount.Password == Password;
         }
 
         public void NavigateToMainPage()

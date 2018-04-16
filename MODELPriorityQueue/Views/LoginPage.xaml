@@ -37,11 +37,13 @@
                 Content="Login As Manager"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" 
-                Click="LoginAsManager_Click"/>
+                Click="LoginAsManager_Click"
+                Visibility="Collapsed"/>
         <Button x:Name="LoginAsTechnician"
                 Content="Login As Technician"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Click="LoginAsTechnician_Click"/>
+                Click="LoginAsTechnician_Click"
+                Visibility="Collapsed"/>
     </Grid>
 </Page>
