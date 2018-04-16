@@ -1,16 +1,35 @@
 ﻿using MODELPriorityQueue.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace MODELPriorityQueue.Modals
 {
-    public sealed partial class AddJobDialog : ContentDialog
+    public sealed partial class AddJobDialog : ContentDialog, INotifyPropertyChanged
     {
         public AddJobDialog()
         {
             this.InitializeComponent();
             Opened += AddJobDialog_Opened;
+            this.DataContext = this;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private ObservableCollection<Customer> customers;
+        public ObservableCollection<Customer> Customers
+        {
+            get { return customers; }
+            set
+            {
+                if (value != customers)
+                {
+                    customers = value;
+                    NotifyPropertyChanged(nameof(Customers));
+                }
+            }
         }
 
         private async void AddJobDialog_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
@@ -50,10 +69,16 @@ namespace MODELPriorityQueue.Modals
                 Subject = Subject.Text,
                 Description = Description.Text,
                 Hours = numHours,
-                Customer = c.Id
+                Customer = c.Id,
+                AssignedBy = App.LoggedInUser.Id
             };
 
             await job.Post();
+        }
+
+        public void NotifyPropertyChanged(string info)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
 }
