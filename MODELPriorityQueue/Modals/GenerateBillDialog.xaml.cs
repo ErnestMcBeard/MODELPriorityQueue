@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MODELPriorityQueue.Models;
 using System.Text;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Popups;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,43 +26,43 @@ namespace MODELPriorityQueue.Modals
 {
     public sealed partial class GenerateBillDialog : ContentDialog
     {
-        //pass parameter and stuff
-        public GenerateBillDialog()
+        private Job job { get; set; }
+        private Technician technician { get; set; }
+        private Customer customer { get; set; }
+
+        public GenerateBillDialog(Job job)
         {
+            this.job = job;
             this.InitializeComponent();
         }
         
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            //double total = 0;
-            ////get info for technician
-            ////Technician t = new Technician();
-            ////DateTimeOffset start = t.StartDate();
-            //DateTimeOffset end = DateTimeOffset.Now;
-            //int years(DateTimeOffset startTime, DateTimeOffset endTime)
-            //{
-            //    return (endTime.Year - startTime.Year - 1) +
-            //        (((endTime.Month > startTime.Month) ||
-            //        ((endTime.Month == startTime.Month) && (endTime.Day >= startTime.Day))) ? 1 : 0);
-            //}
+            double total = 0;
+            //get info for technician
+            Technician t = await Technician.Get(job.Technician);
+            DateTimeOffset start = t.StartDate;
+            DateTimeOffset end = DateTimeOffset.Now;
+            int years = (end.Year - start.Year - 1) +
+                    (((end.Month > start.Month) ||
+                    ((end.Month == start.Month) && (end.Day >= start.Day))) ? 1 : 0);
 
-            //double pay = 30 + (years(start, end) * 10);
-            //total = total + (double.Parse(HoursWorked.Text) * pay);
+            double pay = 30 + (years * 10);
+            total = total + (double.Parse(HoursWorked.Text) * pay);
 
-            ////can't figure out how to access the documents folder without it messing up
-            ////StorageFile file = await openPicker.PickSingleFileAsync();
-            //String path = System.IO.Path.Combine(path + @"Documents\invoice.txt");
-            //if (!File.Exists(path)) Task.Run(() =>
-            //{
-            //    using (StreamWriter sw = System.IO.File.CreateText(path))
-            //    {
-            //        sw.WriteLine("MODEL Computing Services");
-            //        sw.WriteLine("Invoice");
-            //        sw.WriteLine("Total Hours Worked: " + HoursWorked.Text + " hours");
-            //        sw.WriteLine("Technician's Pay: $" + pay.ToString() + " per hour");
-            //        sw.WriteLine("Total Price is: $" + total.ToString());
-            //    }
-            //});
+            var folderPicker = new FolderPicker();
+            folderPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            folderPicker.FileTypeFilter.Add("*");
+
+            StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+            if (folder != null)
+            {
+                var file = await folder.CreateFileAsync("Invoice.txt", CreationCollisionOption.ReplaceExisting);
+            }
+            else
+            {
+                await new MessageDialog("Operation Cancelled").ShowAsync();
+            }
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
