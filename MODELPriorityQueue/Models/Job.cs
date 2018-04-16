@@ -10,6 +10,8 @@ namespace MODELPriorityQueue.Models
         private int priority;
         private int hours;
         private bool completed;
+        private DateTime entered;
+        private DateTime started;
         private Guid nextJob;
         private Guid previousJob;
         private Guid customer;
@@ -44,6 +46,18 @@ namespace MODELPriorityQueue.Models
         {
             get { return completed; }
             set { Set(() => Completed, ref completed, value); }
+        }
+
+        public DateTime Entered
+        {
+            get { return entered; }
+            set { Set(() => Entered, ref entered, value); }
+        }
+
+        public DateTime Started
+        {
+            get { return started; }
+            set { Set(() => Started, ref started, value); }
         }
 
         public Guid NextJob

@@ -109,6 +109,7 @@
       <DependentUpon>StatsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DailyStatistic.cs" />
     <Compile Include="Models\DatabaseEntity.cs" />
     <Compile Include="Models\IUser.cs" />
     <Compile Include="Models\Job.cs" />
