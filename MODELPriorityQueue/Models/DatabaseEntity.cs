@@ -62,7 +62,7 @@ namespace MODELPriorityQueue.Models
             string response = await client.GetStringAsync(new Uri(string.Format("{0}({1})", BaseUrl, id)));
             if (!string.IsNullOrEmpty(response))
             {
-                return JsonConvert.DeserializeObject<ODataResponse<T>>(response).Value.FirstOrDefault();
+                return JsonConvert.DeserializeObject<T>(response);
             }
             return default(T);
         }

@@ -58,6 +58,15 @@ namespace MODELPriorityQueue.Modals
             if (folder != null)
             {
                 var file = await folder.CreateFileAsync("Invoice.txt", CreationCollisionOption.ReplaceExisting);
+                List<string> lines = new List<string>()
+                {
+                    "MODEL Computing Services",
+                    "Invoice",
+                    "Total Hours Worked: " + HoursWorked.Text + " hours",
+                    "Technician's Pay: $" + pay.ToString() + " per hour",
+                    "Total Price is: $" + total.ToString()
+                };
+                await FileIO.WriteLinesAsync(file, lines);
             }
             else
             {
