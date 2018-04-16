@@ -105,19 +105,31 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
-        public void MarkCompleted()
+        public async Task MarkCompleted()
         {
-            /*
-             * The logic for this code should go something like this:
-             * marks the active job complete
-             * updates the back end
-             * sets the new active job to the next on the queue or highest priority
-             * updates the view
-             */
-            SelectedJob.Completed = true;
-            //UPDATE BACKEND CODE HERE
-            //SET ACTIVE JOB TO NEXT JOB
-            //I believe the view will update whenever this changes?
+            if (SelectedJob != null)
+            {
+                //Mark for completion
+                SelectedJob.Completed = true;
+                //Set the finish time
+                SelectedJob.Finished = DateTimeOffset.Now;
+                //Change the Guid reference of the pervious job in the queue to the next job after removal.
+                Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).NextJob = SelectedJob.NextJob;
+                //Change the Guid reference of the next job in the queue to the previous job after removal.
+                Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).PreviousJob = SelectedJob.PreviousJob;
+
+                await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).Update();
+                await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).Update();
+                await SelectedJob.Update();
+
+                Jobs.Remove(SelectedJob);
+                SelectedJob = null;
+            }
+            else
+            {
+                await new MessageDialog("Please select a job").ShowAsync();
+            }
+
         }
 
         public async Task UpdateQueueOrder()

@@ -42,9 +42,9 @@ namespace MODELPriorityQueue.Views
             await ViewModel.SaveJob();
         }
 
-        private void CompletedButton_Click(object sender, RoutedEventArgs e)
+        private async void CompletedButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.MarkCompleted();
+            await ViewModel.MarkCompleted();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

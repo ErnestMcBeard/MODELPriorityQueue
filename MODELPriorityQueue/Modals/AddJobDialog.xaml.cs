@@ -64,6 +64,9 @@ namespace MODELPriorityQueue.Modals
             if (c == null)
                 return;
 
+            //We needed to increment the customer's time serviced when they pay for a job.
+            c.TimesServiced++;
+
             Job job = new Job()
             {
                 Subject = Subject.Text,
@@ -73,7 +76,7 @@ namespace MODELPriorityQueue.Modals
                 Customer = c.Id,
                 AssignedBy = App.LoggedInUser.Id
             };
-
+            await c.Update();
             await job.Post();
         }
 
