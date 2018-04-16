@@ -23,7 +23,8 @@ namespace MODELPriorityQueue.Modals
 {
     public sealed partial class GenerateBillDialog : ContentDialog
     {
-        public GenerateBillDialog(Job currentJob)
+        //pass parameter and stuff
+        public GenerateBillDialog()
         {
             this.InitializeComponent();
         }
@@ -31,8 +32,9 @@ namespace MODELPriorityQueue.Modals
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             double total = 0;
-            Technician t = new Technician();
-            DateTimeOffset start = t.StartDate();
+            //get info for technician
+            //Technician t = new Technician();
+            //DateTimeOffset start = t.StartDate();
             DateTimeOffset end = DateTimeOffset.Now;
             int years(DateTimeOffset startTime, DateTimeOffset endTime)
             {
@@ -44,7 +46,8 @@ namespace MODELPriorityQueue.Modals
             double pay = 30 + (years(start, end) * 10);
             total = total + (double.Parse(HoursWorked.Text) * pay);
 
-            StorageFile file = await openPicker.PickSingleFileAsync();
+            //can't figure out how to access the documents folder without it messing up
+            //StorageFile file = await openPicker.PickSingleFileAsync();
             String path = System.IO.Path.Combine(path + @"Documents\invoice.txt");
             if (!File.Exists(path)) Task.Run(() =>
             {
