@@ -42,7 +42,6 @@ namespace MODELPriorityQueue.Views
                 job = _job;
                 titleTextBlock.Opacity = 0;
                 categoryTextBlock.Opacity = 0;
-                image.Opacity = 0;
             }
 
             /// <summary> 
@@ -72,7 +71,6 @@ namespace MODELPriorityQueue.Views
             public void ShowImage()
             {
                 //image.Source = _item.Image;
-                image.Opacity = 1;
             }
 
             /// <summary> 
@@ -83,7 +81,6 @@ namespace MODELPriorityQueue.Views
                 job = null;
                 titleTextBlock.ClearValue(TextBlock.TextProperty);
                 categoryTextBlock.ClearValue(TextBlock.TextProperty);
-                image.ClearValue(Image.SourceProperty);
             }
 
 

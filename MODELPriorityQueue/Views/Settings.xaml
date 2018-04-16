@@ -25,9 +25,33 @@
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignRightWithPanel="True"
                       RelativePanel.Above="NewManagerPanel">
-                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <Border BorderThickness="0,0,0,1"
+                                    BorderBrush="Black">
+                            <RelativePanel>
+                                <TextBlock x:Name="FirstName"
+                                           Style="{ThemeResource SubtitleTextBlockStyle}">
+                                <Run Text="{Binding FirstName}" />
+                                <Run Text="{Binding LastName}" />
+                                </TextBlock>
+                                <TextBlock x:Name="UserName"
+                                           Style="{ThemeResource BodyTextBlockStyle}"
+                                           Text="{Binding Username}"
+                                           RelativePanel.Below="FirstName" />
+                            </RelativePanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
             </ListView>
             <StackPanel x:Name="NewManagerPanel"
+                        Margin="8,8,4,8"
                         RelativePanel.AlignBottomWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
@@ -42,6 +66,7 @@
                          Text="{Binding NewManager.LastName, Mode=TwoWay}"/>
                 <Button x:Name="AddManagerButton"
                         Content="Add Manager" 
+                        Margin="0,8,0,0"
                         Click="AddManagerButton_Click" />
             </StackPanel>
         </RelativePanel>
@@ -51,9 +76,27 @@
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignRightWithPanel="True"
                       RelativePanel.Above="NewTechnicianPanel">
-
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0,0,0,1"
+                                BorderBrush="Black">
+                            <RelativePanel>
+                                <TextBlock x:Name="FirstName"
+                                            Style="{ThemeResource SubtitleTextBlockStyle}">
+                            <Run Text="{Binding FirstName}" />
+                            <Run Text="{Binding LastName}" />
+                                </TextBlock>
+                                <TextBlock x:Name="UserName"
+                                            Style="{ThemeResource BodyTextBlockStyle}"
+                                            Text="{Binding Username}"
+                                            RelativePanel.Below="FirstName" />
+                            </RelativePanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             <StackPanel x:Name="NewTechnicianPanel"
+                        Margin="4,8"
                         RelativePanel.AlignBottomWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
@@ -70,6 +113,7 @@
                                     Date="{Binding NewTechnician.StartDate, Mode=TwoWay}" />
                 <Button x:Name="AddTechnicianButton"
                         Content="Add Technician"
+                        Margin="0,8,0,0"
                         Click="AddTechnicianButton_Click" />
             </StackPanel>
         </RelativePanel>
@@ -78,10 +122,36 @@
                       RelativePanel.AlignTopWithPanel="True"
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignRightWithPanel="True"
-                      RelativePanel.Above="">
-                
+                      RelativePanel.Above="NewCustomerPanel">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0,0,0,1"
+                                BorderBrush="Black">
+                            <RelativePanel>
+                                <TextBlock x:Name="Name" 
+                                           Style="{ThemeResource SubtitleTextBlockStyle}"
+                                           Text="{Binding Name}" />
+                                <TextBlock x:Name="Street"
+                                           Style="{ThemeResource BodyTextBlockStyle}"
+                                           Text="{Binding Street}" 
+                                           RelativePanel.Below="Name" />
+                                <TextBlock x:Name="City"
+                                           Style="{ThemeResource BodyTextBlockStyle}"
+                                           Text="{Binding City}"
+                                           RelativePanel.Below="Street" />
+                            </RelativePanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             <StackPanel x:Name="NewCustomerPanel"
+                        Margin="4,8,8,8"
                         RelativePanel.AlignBottomWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
@@ -98,6 +168,7 @@
                          Text="{Binding NewCustomer.Zip, Mode=TwoWay}" />
                 <Button x:Name="AddCustomerButton"
                         Content="Add Customer"
+                        Margin="0,8,0,0"
                         Click="AddCustomerButton_Click" />
             </StackPanel>
         </RelativePanel>

@@ -28,6 +28,11 @@ namespace MODELPriorityQueue.Views
         {
             await new StatsDialog().ShowAsync();
         }
+        
+        private async void PaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+            await new GenerateBillDialog().ShowAsync();
+        }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
