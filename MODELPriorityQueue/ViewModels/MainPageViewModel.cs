@@ -174,6 +174,7 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
+        //This Shouldnt be needed anymore
         public async Task SetPrioritiesInQueue()
         {
             foreach (Job currentJob in Jobs)
