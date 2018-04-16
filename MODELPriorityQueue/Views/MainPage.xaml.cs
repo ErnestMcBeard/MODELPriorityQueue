@@ -31,7 +31,10 @@ namespace MODELPriorityQueue.Views
         
         private async void PaymentButton_Click(object sender, RoutedEventArgs e)
         {
-            await new GenerateBillDialog().ShowAsync();
+            if (ViewModel.SelectedJob != null)
+            {
+                await new GenerateBillDialog(ViewModel.SelectedJob).ShowAsync();
+            }
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
