@@ -68,6 +68,7 @@ namespace MODELPriorityQueue.Modals
             {
                 Subject = Subject.Text,
                 Description = Description.Text,
+                Priority = c.Priority(),
                 Hours = numHours,
                 Customer = c.Id,
                 AssignedBy = App.LoggedInUser.Id

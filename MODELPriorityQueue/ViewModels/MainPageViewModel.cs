@@ -120,38 +120,47 @@ namespace MODELPriorityQueue.ViewModels
             //I believe the view will update whenever this changes?
         }
 
-        public void UpdateQueueOrder()
+        public async Task UpdateQueueOrder()
         {
             foreach(Job currenntJob in Jobs)
             {
+                //This code will only execute if the Job that is moved is moved above one that has a lower priority then it. 
+                //This prevents a call from Prioritize Queue from ruining the queue order.
+                if(currenntJob.Priority > Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority)
+                {
+                    currenntJob.Priority = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority;
+                }
+
                 if(Jobs.IndexOf(currenntJob) == 0)
                 {
                     //Allegedly this is how you null a Guid value
                     currenntJob.PreviousJob = Guid.Empty;
+                    await currenntJob.Update();
+
                 }
                 else
                 {
                     currenntJob.PreviousJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob)-1).Id;
+                    await currenntJob.Update();
                 }
                 if(Jobs.IndexOf(currenntJob) == Jobs.Count - 1)
                 {
                     currenntJob.NextJob = Guid.Empty;
+                    await currenntJob.Update();
                 }
                 else
                 {
                     currenntJob.NextJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Id;
+                    await currenntJob.Update();
                 }
             }
         }
 
-        public async Task PrioritizeQueue()
+        public void PrioritizeQueue()
         {
             foreach (Job currentJob in Jobs)
             {
-                Customer currentJobsCustomer = await Customer.Get(currentJob.Customer);
-                Customer nextJobsCustomer = await Customer.Get(Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1).Customer);
-
-                if (currentJobsCustomer.Priority() < nextJobsCustomer.Priority())
+                if (currentJob.Priority < Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1).Priority)
                 {
                     continue;
                 }
@@ -163,6 +172,15 @@ namespace MODELPriorityQueue.ViewModels
                     Jobs.Insert(Jobs.IndexOf(currentJob), temp);
                     Jobs.Remove(currentJob);
                 }   
+            }
+        }
+
+        public async Task SetPrioritiesInQueue()
+        {
+            foreach (Job currentJob in Jobs)
+            {
+                Customer currentJobsCustomer = await Customer.Get(currentJob.Customer);
+                currentJob.Priority = currentJobsCustomer.Priority();
             }
         }
 
