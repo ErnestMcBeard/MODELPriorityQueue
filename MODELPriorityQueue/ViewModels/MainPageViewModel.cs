@@ -137,23 +137,23 @@ namespace MODELPriorityQueue.ViewModels
                 {
                     //Allegedly this is how you null a Guid value
                     currenntJob.PreviousJob = Guid.Empty;
-                    //await currenntJob.Update();
+                    await currenntJob.Update();
 
                 }
                 else
                 {
                     currenntJob.PreviousJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob)-1).Id;
-                    //await currenntJob.Update();
+                    await currenntJob.Update();
                 }
                 if(Jobs.IndexOf(currenntJob) == Jobs.Count - 1)
                 {
                     currenntJob.NextJob = Guid.Empty;
-                    //await currenntJob.Update();
+                    await currenntJob.Update();
                 }
                 else
                 {
                     currenntJob.NextJob = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Id;
-                    //await currenntJob.Update();
+                    await currenntJob.Update();
                 }
             }
         }
