@@ -38,9 +38,9 @@ namespace MODELPriorityQueue.Modals
             DateTimeOffset end = DateTimeOffset.Now;
             int years(DateTimeOffset startTime, DateTimeOffset endTime)
             {
-                return (end.Year - start.Year - 1) +
-                    (((end.Month > start.Month) ||
-                    ((end.Month == start.Month) && (end.Day >= start.Day))) ? 1 : 0);
+                return (endTime.Year - startTime.Year - 1) +
+                    (((endTime.Month > startTime.Month) ||
+                    ((endTime.Month == startTime.Month) && (endTime.Day >= startTime.Day))) ? 1 : 0);
             }
 
             double pay = 30 + (years(start, end) * 10);
