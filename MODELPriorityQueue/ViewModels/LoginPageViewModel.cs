@@ -1,6 +1,7 @@
 ﻿using MODELPriorityQueue.Models;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using System;
 
 namespace MODELPriorityQueue.ViewModels
 {
@@ -31,6 +32,20 @@ namespace MODELPriorityQueue.ViewModels
         {
 
         }
+
+        //internal async Task CreateUser()
+        //{
+        //    Technician t = new Technician()
+        //    {
+        //        FirstName = "Jeremy",
+        //        LastName = "Krouse",
+        //        Password = "pancakes",
+        //        Username = "jdaddy",
+        //        StartDate = DateTimeOffset.Now
+        //    };
+
+        //    await t.Post();
+        //}
 
         /// <summary>
         /// Tries to login into the system with the values stored in Username and Password.

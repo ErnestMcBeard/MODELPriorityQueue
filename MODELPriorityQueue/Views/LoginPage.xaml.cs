@@ -25,6 +25,7 @@ namespace MODELPriorityQueue.Views
             if (!(await ViewModel.AttemptLogin()))
             {
                 await new MessageDialog("Incorrect Credentials").ShowAsync();
+                //await ViewModel.CreateUser();
             }
             else
             {
