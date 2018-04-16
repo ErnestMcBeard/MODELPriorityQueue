@@ -120,7 +120,7 @@ namespace MODELPriorityQueue.ViewModels
             //I believe the view will update whenever this changes?
         }
 
-        public async void UpdateQueueOrder()
+        public async Task UpdateQueueOrder()
         {
             foreach(Job currenntJob in Jobs)
             {
