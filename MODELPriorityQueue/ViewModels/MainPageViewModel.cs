@@ -124,22 +124,10 @@ namespace MODELPriorityQueue.ViewModels
                 SelectedJob.Completed = true;
                 //Set the finish time
                 SelectedJob.Finished = DateTimeOffset.Now;
-
-                /*if(Jobs.IndexOf(SelectedJob) != 0)
-                {
-                    //Change the Guid reference of the pervious job in the queue to the next job after removal.
-                    Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).NextJob = SelectedJob.NextJob;
-                    await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).Update();
-                }
-                if(Jobs.IndexOf(SelectedJob) != Jobs.Count-1)
-                {
-                    //Change the Guid reference of the next job in the queue to the previous job after removal.
-                    Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).PreviousJob = SelectedJob.PreviousJob;
-                    await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).Update();
-                }
-                */
+                //Update backend
                 await SelectedJob.Update();
 
+                //Remove from active job queue
                 Jobs.Remove(SelectedJob);
                 SelectedJob = null;
             }
@@ -165,7 +153,7 @@ namespace MODELPriorityQueue.ViewModels
                 }
                 if(Jobs.IndexOf(currenntJob) == 0)
                 {
-                    //Allegedly this is how you null a Guid value
+                    //Nulling Guid
                     currenntJob.PreviousJob = Guid.Empty;
                 }
                 else
@@ -184,54 +172,6 @@ namespace MODELPriorityQueue.ViewModels
                 await currenntJob.Update();
             }
         }
-
-        /*Dead Code
-        public void PrioritizeQueue()
-        {
-            Collection<Job> temp = new Collection<Job>();
-            Job highestPriority = Jobs.ElementAt(0);
-            int i = 0;
-            while(Jobs.Count != 0)
-            {
-                if(i == Jobs.Count - 1)
-                {
-                    temp.Add(highestPriority);
-                    Jobs.Remove(highestPriority);
-                    i = 0;
-                    highestPriority = Jobs.ElementAt(i);
-                }
-
-                if (Jobs.Count == 1)
-                {
-                    temp.Add(highestPriority);
-                    Jobs.Remove(highestPriority);
-                    break;
-                }
-
-                if(highestPriority.Priority > Jobs.ElementAt(i+1).Priority)
-                {
-                    highestPriority = Jobs.ElementAt(i+1);
-                }
-                i++;
-            }
-
-            while(temp.Count != 0)
-            {
-                Jobs.Add(temp.ElementAt(0));
-                temp.RemoveAt(0);
-            }
-        }
-
-        //This Shouldnt be needed anymore
-        public async Task SetPrioritiesInQueue()
-        {
-            foreach (Job currentJob in Jobs)
-            {
-                Customer currentJobsCustomer = await Customer.Get(currentJob.Customer);
-                currentJob.Priority = currentJobsCustomer.Priority();
-            }
-        }
-        */
 
         public void NavigateToSettingsPage()
         {
@@ -275,7 +215,9 @@ namespace MODELPriorityQueue.ViewModels
         public async Task UpdateDailyStatistic(int newQueueSize)
         {
             //Statistics Stuff
-            DailyStatistic todaysStat = await DailyStatistic.Get(string.Format("$filter=Date eq {0}", new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, default(TimeSpan)).ToString("yyyy-MM-ddTHH:mm:ssZ")));
+            DailyStatistic todaysStat = await DailyStatistic.Get(string.Format("$filter=Date eq {0}", new DateTimeOffset(DateTime.Now.Year, 
+                DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, default(TimeSpan)).ToString("yyyy-MM-ddTHH:mm:ssZ")));
+
             if (todaysStat == null)
             {
                 todaysStat = new DailyStatistic();

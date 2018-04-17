@@ -18,7 +18,6 @@ namespace MODELPriorityQueue.Views
 
         private async void AddJobButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implementation will need to be changed later.
             var dialog = new AddJobDialog();
             var result =  await dialog.ShowAsync();
             if (result == ContentDialogResult.Secondary)
