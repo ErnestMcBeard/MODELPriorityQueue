@@ -117,9 +117,14 @@ namespace MODELPriorityQueue.ViewModels
                 Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).NextJob = SelectedJob.NextJob;
                 //Change the Guid reference of the next job in the queue to the previous job after removal.
                 Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).PreviousJob = SelectedJob.PreviousJob;
-
-                await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).Update();
-                await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).Update();
+                if(Jobs.IndexOf(SelectedJob) != 0)
+                {
+                    await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).Update();
+                }
+                if(Jobs.IndexOf(SelectedJob) != Jobs.Count-1)
+                {
+                    await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).Update();
+                }
                 await SelectedJob.Update();
 
                 Jobs.Remove(SelectedJob);
@@ -134,7 +139,7 @@ namespace MODELPriorityQueue.ViewModels
 
         public async Task UpdateQueueOrder()
         {
-            foreach(Job currenntJob in Jobs)
+            foreach (Job currenntJob in Jobs)
             {
                 //This code will only execute if the Job that is moved is moved above one that has a lower priority then it. 
                 //This prevents a call from Prioritize Queue from ruining the queue order.
@@ -167,22 +172,40 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
+        /*Dead Code
         public void PrioritizeQueue()
         {
-            foreach (Job currentJob in Jobs)
+            Collection<Job> temp = new Collection<Job>();
+            Job highestPriority = Jobs.ElementAt(0);
+            int i = 0;
+            while(Jobs.Count != 0)
             {
-                if (currentJob.Priority < Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1).Priority)
+                if(i == Jobs.Count - 1)
                 {
-                    continue;
+                    temp.Add(highestPriority);
+                    Jobs.Remove(highestPriority);
+                    i = 0;
+                    highestPriority = Jobs.ElementAt(i);
                 }
-                else
+
+                if (Jobs.Count == 1)
                 {
-                    Job temp = Jobs.ElementAt(Jobs.IndexOf(currentJob) + 1);
-                    Jobs.RemoveAt(Jobs.IndexOf(currentJob) + 1);
-                    Jobs.Insert((Jobs.IndexOf(currentJob) + 1), currentJob);
-                    Jobs.Insert(Jobs.IndexOf(currentJob), temp);
-                    Jobs.Remove(currentJob);
-                }   
+                    temp.Add(highestPriority);
+                    Jobs.Remove(highestPriority);
+                    break;
+                }
+
+                if(highestPriority.Priority > Jobs.ElementAt(i+1).Priority)
+                {
+                    highestPriority = Jobs.ElementAt(i+1);
+                }
+                i++;
+            }
+
+            while(temp.Count != 0)
+            {
+                Jobs.Add(temp.ElementAt(0));
+                temp.RemoveAt(0);
             }
         }
 
@@ -195,6 +218,7 @@ namespace MODELPriorityQueue.ViewModels
                 currentJob.Priority = currentJobsCustomer.Priority();
             }
         }
+        */
 
         public void NavigateToSettingsPage()
         {

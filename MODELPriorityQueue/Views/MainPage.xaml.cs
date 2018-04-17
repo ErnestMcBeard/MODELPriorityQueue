@@ -115,17 +115,5 @@ namespace MODELPriorityQueue.Views
         {
             await ViewModel.AssignTechnician();
         }
-
-        //This will still be needed once we get the Updates working
-        private void Prioritize()
-        {
-            ViewModel.PrioritizeQueue();
-        }
-
-        //This shouldnt be needed anymore
-        private async void SetPriorities()
-        {
-            await ViewModel.SetPrioritiesInQueue();
-        }
     }
 }
