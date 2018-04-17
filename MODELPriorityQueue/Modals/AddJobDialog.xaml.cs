@@ -75,7 +75,8 @@ namespace MODELPriorityQueue.Modals
                 Priority = c.Priority(),
                 Hours = numHours,
                 Customer = c.Id,
-                AssignedBy = App.LoggedInUser.Id
+                AssignedBy = App.LoggedInUser.Id,
+                Entered = DateTime.Now
             };
 
             

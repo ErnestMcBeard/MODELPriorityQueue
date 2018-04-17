@@ -23,7 +23,7 @@ namespace MODELPriorityQueue.Views
             var result =  await dialog.ShowAsync();
             if (result == ContentDialogResult.Secondary)
             {
-                await ViewModel.UpdateDailyStatistic();
+                await ViewModel.UpdateDailyStatistic(ViewModel.Jobs.Count + 1);
             }
             await ViewModel.LoadScreenData();
         }
@@ -49,7 +49,7 @@ namespace MODELPriorityQueue.Views
         private async void CompletedButton_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.MarkCompleted();
-            await ViewModel.UpdateDailyStatistic();
+            await ViewModel.UpdateDailyStatistic(ViewModel.Jobs.Count);
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -65,6 +65,7 @@ namespace MODELPriorityQueue.Views
         private async void DeleteJobButton_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.DeleteJob();
+            await ViewModel.UpdateDailyStatistic(ViewModel.Jobs.Count);
         }
 
         //QUEUE STUFF

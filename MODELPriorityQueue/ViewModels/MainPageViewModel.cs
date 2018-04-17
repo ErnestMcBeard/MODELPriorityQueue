@@ -272,7 +272,7 @@ namespace MODELPriorityQueue.ViewModels
             }
         }
 
-        public async Task UpdateDailyStatistic()
+        public async Task UpdateDailyStatistic(int newQueueSize)
         {
             //Statistics Stuff
             DailyStatistic todaysStat = await DailyStatistic.Get(string.Format("$filter=Date eq {0}", new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, default(TimeSpan)).ToString("yyyy-MM-ddTHH:mm:ssZ")));
@@ -280,12 +280,12 @@ namespace MODELPriorityQueue.ViewModels
             {
                 todaysStat = new DailyStatistic();
                 todaysStat.Date = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, default(TimeSpan));
-                todaysStat.LastQueueLength = Jobs.Count;
+                todaysStat.LastQueueLength = newQueueSize;
                 await todaysStat.Post();
             }
             else
             {
-                todaysStat.LastQueueLength = Jobs.Count;
+                todaysStat.LastQueueLength = newQueueSize;
                 await todaysStat.Update();
             }
         }
