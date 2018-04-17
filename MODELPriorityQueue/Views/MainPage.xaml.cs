@@ -20,7 +20,11 @@ namespace MODELPriorityQueue.Views
         {
             // Implementation will need to be changed later.
             var dialog = new AddJobDialog();
-            await dialog.ShowAsync();
+            var result =  await dialog.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                await ViewModel.UpdateDailyStatistic();
+            }
             await ViewModel.LoadScreenData();
         }
 
@@ -45,6 +49,7 @@ namespace MODELPriorityQueue.Views
         private async void CompletedButton_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.MarkCompleted();
+            await ViewModel.UpdateDailyStatistic();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

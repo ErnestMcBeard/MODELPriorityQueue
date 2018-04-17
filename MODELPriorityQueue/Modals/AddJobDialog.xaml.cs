@@ -1,4 +1,5 @@
 ﻿using MODELPriorityQueue.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
@@ -76,6 +77,8 @@ namespace MODELPriorityQueue.Modals
                 Customer = c.Id,
                 AssignedBy = App.LoggedInUser.Id
             };
+
+            
             await c.Update();
             await job.Post();
         }

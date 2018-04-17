@@ -8,10 +8,10 @@ namespace MODELPriorityQueue.Models
 {
     public class DailyStatistic : DatabaseEntity<DailyStatistic>
     {
-        private DateTime date;
+        private DateTimeOffset date;
         private int lastQueueLength;
 
-        public DateTime Date
+        public DateTimeOffset Date
         {
             get { return date; }
             set { Set(() => Date, ref date, value); }
