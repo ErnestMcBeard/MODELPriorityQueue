@@ -208,6 +208,7 @@ namespace MODELPriorityQueue.ViewModels
             if (SelectedJob != null && App.LoggedInUser.GetType() == typeof(Technician))
             {
                 SelectedJob.Technician = LoggedInUser.Id;
+                selectedJob.Started = DateTime.Now;
                 await SelectedJob.Update();
             }
         }
