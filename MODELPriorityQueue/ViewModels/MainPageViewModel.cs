@@ -83,7 +83,18 @@ namespace MODELPriorityQueue.ViewModels
         public async Task LoadScreenData()
         {
             LoggedInUser = App.LoggedInUser;
+            //This currently returns the entire list of Jobs back regardless.
             Jobs = new ObservableCollection<Job>(await Job.Get());
+            //This is an inefficient, but rudimentary way of making sure only uncompleted jobs are loaded back.
+            ObservableCollection<Job> temp = new ObservableCollection<Job>();
+            foreach(Job job in Jobs)
+            {
+                if (!job.Completed)
+                {
+                    temp.Add(job);
+                }
+            }
+            Jobs = temp;
             Customers = new ObservableCollection<Customer>(await Customer.Get());
             Managers = new ObservableCollection<Manager>(await Manager.Get());
             Technicians = new ObservableCollection<Technician>(await Technician.Get());
@@ -113,18 +124,20 @@ namespace MODELPriorityQueue.ViewModels
                 SelectedJob.Completed = true;
                 //Set the finish time
                 SelectedJob.Finished = DateTimeOffset.Now;
-                //Change the Guid reference of the pervious job in the queue to the next job after removal.
-                Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).NextJob = SelectedJob.NextJob;
-                //Change the Guid reference of the next job in the queue to the previous job after removal.
-                Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).PreviousJob = SelectedJob.PreviousJob;
-                if(Jobs.IndexOf(SelectedJob) != 0)
+
+                /*if(Jobs.IndexOf(SelectedJob) != 0)
                 {
+                    //Change the Guid reference of the pervious job in the queue to the next job after removal.
+                    Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).NextJob = SelectedJob.NextJob;
                     await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) - 1).Update();
                 }
                 if(Jobs.IndexOf(SelectedJob) != Jobs.Count-1)
                 {
+                    //Change the Guid reference of the next job in the queue to the previous job after removal.
+                    Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).PreviousJob = SelectedJob.PreviousJob;
                     await Jobs.ElementAt(Jobs.IndexOf(SelectedJob) + 1).Update();
                 }
+                */
                 await SelectedJob.Update();
 
                 Jobs.Remove(SelectedJob);
@@ -267,6 +280,7 @@ namespace MODELPriorityQueue.ViewModels
             {
                 todaysStat = new DailyStatistic();
                 todaysStat.Date = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, default(TimeSpan));
+                todaysStat.LastQueueLength = Jobs.Count;
                 await todaysStat.Post();
             }
             else
