@@ -148,7 +148,7 @@ namespace MODELPriorityQueue.ViewModels
                 {
                     if (currenntJob.Priority > Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority)
                     {
-                        currenntJob.Priority = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority;
+                        currenntJob.Priority = Jobs.ElementAt(Jobs.IndexOf(currenntJob) + 1).Priority - 1;
                     }
                 }
                 if(Jobs.IndexOf(currenntJob) == 0)
